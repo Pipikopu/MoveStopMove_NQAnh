@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character, IHit, ITarget
+public class Player : Character, ITarget
 {
     // Player Variables
     [Header("Player Setting")]
+    public Player player;
     public Transform playerTransform;
     public Transform playerModel;
     public Rigidbody playerRb;
+    public Collider playerCollider;
 
     // Joystick Variables
     [Header("Joystick")]
@@ -28,13 +30,12 @@ public class Player : Character, IHit, ITarget
     [Header("Animator")]
     public Animator playerAnimator;
 
-    // Character Boundary
-    [Header("Boundary")]
-    public CharacterBoundary charBound;
-
     // Weapon
     [Header("Weapon")]
-    public Weapon weapon;
+    private Weapon weapon;
+    public WeaponID weaponID;
+    public Transform weaponHolder;
+    public WeaponSkinID weaponSkinID;
 
     // Boolean Variables
     private bool canAttack;
@@ -55,6 +56,8 @@ public class Player : Character, IHit, ITarget
         canAttack = true;
         isDead = false;
         isWin = false;
+
+        InitWeapon();
     }
 
     private void Update()
@@ -77,8 +80,13 @@ public class Player : Character, IHit, ITarget
         MoveCharacter(movement);
     }
 
+    private void InitWeapon()
+    {
+        weapon = WeaponManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
+    }
+
     #region Move
-    protected override void Move()
+    public override void Move()
     {
         inputX = joystick.inputHorizontal();
         inputZ = joystick.inputVertical();
@@ -117,12 +125,12 @@ public class Player : Character, IHit, ITarget
 
     private void MoveCharacter(Vector3 direction)
     {
-        playerRb.velocity = direction * moveSpeed * Time.deltaTime;
+        playerRb.velocity = direction * moveSpeed * Time.deltaTime * GetScale();
     }
     #endregion
 
     #region Attack
-    protected override void Attack()
+    public override void Attack()
     {
         if (canAttack)
         {
@@ -135,10 +143,20 @@ public class Player : Character, IHit, ITarget
                 Vector3 directToTarget = targetCharacter.transform.position - playerTransform.position;
                 RotateToTargetCharacter(directToTarget);
 
-                weapon.Attack(playerModel, playerModel.gameObject);
-                weapon.gameObject.SetActive(false);
+                StartCoroutine(ThrowWeapon());
                 Invoke(nameof(StopAttack), 1f);
             }
+        }
+    }
+
+    IEnumerator ThrowWeapon()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (!canAttack)
+        {
+            playerAnimator.SetBool(Constant.ANIM_IS_ATTACK, true);
+            weapon.Attack(playerModel, player);
+            weapon.gameObject.SetActive(false);
         }
     }
 
@@ -160,14 +178,18 @@ public class Player : Character, IHit, ITarget
     #region Death
     public override void Death()
     {
-        isDead = true;
-        movement = Vector3.zero;
-        playerAnimator.SetBool(Constant.ANIM_IS_DEAD, true);
-        joystickCanvas.gameObject.SetActive(false);
+        if (!isWin)
+        {
+            isDead = true;
+            movement = Vector3.zero;
+            playerAnimator.SetBool(Constant.ANIM_IS_DEAD, true);
+            joystickCanvas.gameObject.SetActive(false);
+            playerCollider.enabled = false;
 
-        LevelManager.Ins.Lose();
-        UIManager.Ins.GetUI(UIID.UICGameplay).Close();
-        UIManager.Ins.OpenUI(UIID.UICFail);
+            LevelManager.Ins.Lose();
+            UIManager.Ins.GetUI(UIID.UICGameplay).Close();
+            UIManager.Ins.OpenUI(UIID.UICFail);
+        }
     }
 
     public bool CanBeTargeted()
@@ -183,14 +205,17 @@ public class Player : Character, IHit, ITarget
     #region Win
     public void Win()
     {
-        isWin = true;
-        movement = Vector3.zero;
-        playerAnimator.SetBool(Constant.ANIM_IS_WIN, true);
-        joystickCanvas.gameObject.SetActive(false);
+        if (!isDead)
+        {
+            isWin = true;
+            movement = Vector3.zero;
+            playerAnimator.SetBool(Constant.ANIM_IS_WIN, true);
+            joystickCanvas.gameObject.SetActive(false);
 
-        LevelManager.Ins.Win();
-        UIManager.Ins.GetUI(UIID.UICGameplay).Close();
-        UIManager.Ins.OpenUI(UIID.UICVictory);
+            LevelManager.Ins.Win();
+            UIManager.Ins.GetUI(UIID.UICGameplay).Close();
+            UIManager.Ins.OpenUI(UIID.UICVictory);
+        }
     }
     #endregion
 }

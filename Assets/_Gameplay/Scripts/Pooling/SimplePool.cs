@@ -151,6 +151,7 @@ public static class SimplePool
             }
 
             obj.transform.SetPositionAndRotation(position, rotation);
+
             new WaitForSeconds(Random.Range(1f, 5f));
             obj.gameObject.SetActive(true);
 

@@ -12,7 +12,6 @@ public class BotMoveState : BotBaseState
         bot.agent.speed = bot.speedAgent;
         bot.agent.SetDestination(RandomNavMeshLocation(bot));
         bot.botAnimator.SetBool(Constant.ANIM_IS_IDLE, false);
-        //bot.botAnimator.SetBool(Constant.ANIM_IS_ATTACK, false);
     }
 
     public override void UpdateState(BotStateMachine bot)

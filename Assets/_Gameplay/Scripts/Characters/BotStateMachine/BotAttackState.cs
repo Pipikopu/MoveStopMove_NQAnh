@@ -9,10 +9,9 @@ public class BotAttackState : BotBaseState
     public override void EnterState(BotStateMachine bot)
     {
         timeCounter = 0;
+        bot.agent.speed = 0;
         bot.botAnimator.SetBool(Constant.ANIM_IS_ATTACK, true);
-        bot.weapon.Attack(bot.botModel, bot.botModel.gameObject);
-        bot.weapon.gameObject.SetActive(false);
-
+        bot.Attack();
     }
 
     public override void UpdateState(BotStateMachine bot)
@@ -20,7 +19,7 @@ public class BotAttackState : BotBaseState
         timeCounter += Time.deltaTime;
         if (timeCounter > bot.timeAttack)
         {
-            bot.SwitchState(bot.MoveState);
+            bot.SwitchState(bot.IdleState);
         }
     }
 
@@ -28,5 +27,4 @@ public class BotAttackState : BotBaseState
     {
         bot.botAnimator.SetBool(Constant.ANIM_IS_ATTACK, false);
     }
-
 }

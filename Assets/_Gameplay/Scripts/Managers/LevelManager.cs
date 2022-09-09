@@ -6,26 +6,24 @@ using UnityEngine.AI;
 public class LevelManager : Singleton<LevelManager>
 {
     public int numOfBots;
+    private int numOfBotsDie = 0;
+
     private Constant.GameState gameState;
-
-    private void Start()
-    {
-        OnInit();
-    }
-
-    private void OnInit()
-    {
-        gameState = Constant.GameState.PLAY;
-    }
 
     public void DecreaseNumOfBots(int decreaseNum)
     {
         numOfBots -= decreaseNum;
+        numOfBotsDie += decreaseNum;
     }
 
     public int GetRemainNumOfBots()
     {
         return numOfBots;
+    }
+
+    public int GetNumOfBotsDie()
+    {
+        return numOfBotsDie;
     }
 
     public void Win()
@@ -41,5 +39,10 @@ public class LevelManager : Singleton<LevelManager>
     public Constant.GameState GetGameState()
     {
         return gameState;
+    }
+
+    public void SetGameState(Constant.GameState newGameState)
+    {
+        gameState = newGameState;
     }
 }

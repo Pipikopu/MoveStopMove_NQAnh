@@ -21,11 +21,10 @@ public class BotDeathState : BotBaseState
         timeCounter += Time.deltaTime;
         if (timeCounter > bot.timeDeath)
         {
+            timeCounter = 0;
             BotController.Ins.ReuseBot(bot.botTransform.gameObject);
         }
     }
 
     public override void ExitState(BotStateMachine bot) { }
-
-
 }

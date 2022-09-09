@@ -1,102 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3807601876020767607
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3807601876020767606}
-  - component: {fileID: 3807601876020767604}
-  - component: {fileID: 3807601876020767605}
-  - component: {fileID: 3807601876020767603}
-  m_Layer: 0
-  m_Name: Hammer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3807601876020767606
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807601876020767607}
-  m_LocalRotation: {x: 0, y: 0, z: -0.9659258, w: 0.2588191}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 39, y: 39, z: 39}
-  m_Children: []
-  m_Father: {fileID: 3807601877051806999}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -150}
---- !u!33 &3807601876020767604
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807601876020767607}
-  m_Mesh: {fileID: 4300000, guid: 90389cac50942cb4ca38583e6531094a, type: 3}
---- !u!23 &3807601876020767605
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807601876020767607}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 7f85281e1455c43f6a5cbd2a6db13e2d, type: 2}
-  - {fileID: 2100000, guid: 7f85281e1455c43f6a5cbd2a6db13e2d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3807601876020767603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807601876020767607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14eee558ef78e49bd98acefbbca1c4e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 3807601876020767607}
-  bulletPrefab: {fileID: -5103996357666115005, guid: e5412cbb9fdac4534aaa9c8be5189444, type: 3}
 --- !u!1 &3807601876034918493
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,8 +381,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3807601876020767606}
+  m_Children: []
   m_Father: {fileID: 7464841461407409143}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -761,8 +663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57b5f6ef913447d7b35fc9b2128b89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterTransform: {fileID: 3807601877254056612}
-  thisCharModel: {fileID: 5185539474599433863}
+  charBoundTransform: {fileID: 3807601877254056612}
+  character: {fileID: 3807601876216330519}
   isPlayer: 0
 --- !u!1001 &3807601876207143825
 PrefabInstance:
@@ -1009,14 +911,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f3d8b90cda6724ac4b8e2fa0f941e9eb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+--- !u!4 &9193349512181173478 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3800467336962686104, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 3807601877832208270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7464841461407409143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3220319501169496967, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
-  m_PrefabInstance: {fileID: 3807601877832208270}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2245016603555105262 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 3807601877832208270}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8191455590075409556 stripped
@@ -1029,9 +931,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 3807601877832208270}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &9193349512181173478 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3800467336962686104, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+--- !u!95 &2245016603555105262 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 3807601877832208270}
   m_PrefabAsset: {fileID: 0}
 --- !u!136 &3807601876216330506
@@ -1060,17 +962,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39260dc1d5e24be59d594b908154ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charBound: {fileID: 3807601877254056610}
+  scoreText: {fileID: 3807601877160331112}
   bot: {fileID: 3807601876216330519}
   botTransform: {fileID: 3807601877254056612}
   botModel: {fileID: 8191455590075409556}
   underUI: {fileID: 3807601876034918493}
+  botCollider: {fileID: 3807601876216330506}
   agent: {fileID: 3807601877254056614}
   speedAgent: 5
   walkRadius: 20
   rotateSpeed: 540
   botAnimator: {fileID: 2245016603555105262}
-  charBound: {fileID: 3807601877254056610}
-  weapon: {fileID: 3807601876020767603}
-  timeIdle: 2
-  timeAttack: 3
+  timeIdle: 0.5
+  timeAttack: 1.5
   timeDeath: 1.5
+  weaponHolder: {fileID: 3807601877051806999}

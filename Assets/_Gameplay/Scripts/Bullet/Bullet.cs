@@ -5,24 +5,26 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Transform bulletTransform;
-    public GameObject originWeapon;
-    public GameObject originCharModel;
-    public GameObject originCharacter;
+    public Transform bulletRenderTransform;
+    internal GameObject originWeapon;
+    internal CharacterBoundary originCharBound;
+    internal Character originCharacter;
+    public MeshRenderer meshRend;
 
-    public Vector3 directionVector = Vector3.zero;
-    private Vector3 targetPosition = Vector3.zero;
+    internal Vector3 directionVector = Vector3.zero;
+    private Vector3 originPos;
 
+    public float range;
     public float speed;
-    public float rotateSpeed;
 
     void Update()
     {
         if (directionVector != Vector3.zero)
         {
-            if (Vector3.Distance(bulletTransform.position, targetPosition) >= 0.15f)
+            if (Vector3.Distance(bulletTransform.position, originPos) <= range * originCharacter.GetScale())
             {
-                bulletTransform.position += directionVector * speed * Time.deltaTime;
-                bulletTransform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
+                bulletTransform.position += directionVector * speed * Time.deltaTime * originCharacter.GetScale();
+                SpecialMove();
             }
             else
             {
@@ -32,45 +34,41 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void SetTargetPosition(Vector3 position)
-    {
-        targetPosition = position;
-    }
+    protected virtual void SpecialMove() { }
+
+    public virtual void InitSkin(WeaponSkinID SkinID) { }
 
     public void SetOriginWeapon(GameObject weapon)
     {
         originWeapon = weapon;
     }
 
-    public void SetOriginCharModel(GameObject charModel)
-    {
-        originCharModel = charModel;
-    }
-
-    public void SetOriginCharacter(GameObject character)
+    public void SetOriginCharacter(Character character)
     {
         originCharacter = character;
+        originPos = originCharacter.transform.position;
     }
 
     public void SetDirectionVector(Vector3 vector)
     {
         directionVector = vector;
-        targetPosition = originCharacter.transform.position + Vector3.up * 1f + originCharacter.transform.forward * 6f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constant.TAG_CHAR_MODEL))
         {
-            if (other.gameObject.GetInstanceID() != originCharModel.GetInstanceID())
+            if (other.gameObject.GetInstanceID() != originCharacter.gameObject.GetInstanceID())
             {
                 originWeapon.SetActive(true);
+                originCharacter.IncreaseScale(1.1f);
+                originCharacter.IncreaseScore(1);
                 IHit newIHit = other.gameObject.GetComponent<IHit>();
                 if (newIHit != null)
                 {
                     newIHit.GetHit();
+                    Destroy(this.gameObject);
                 }
-                Destroy(this.gameObject);
             }
         }
     }

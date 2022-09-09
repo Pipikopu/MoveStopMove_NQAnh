@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotStateMachine : Character, IHit, ITarget
+public class BotStateMachine : Character, ITarget
 {
     public BotStateMachine bot;
 
@@ -14,12 +14,14 @@ public class BotStateMachine : Character, IHit, ITarget
     public BotMoveState MoveState = new BotMoveState();
     public BotAttackState AttackState = new BotAttackState();
     public BotDeathState DeathState = new BotDeathState();
+    public BotWaitState WaitState = new BotWaitState();
 
     // Bot Variables
     [Header("Bot Setting")]
     public Transform botTransform;
     public Transform botModel;
     public GameObject underUI;
+    public Collider botCollider;
 
     // NavMeshAgent
     [Header("Nav Mesh Agent")]
@@ -37,17 +39,23 @@ public class BotStateMachine : Character, IHit, ITarget
 
     // Character Boundary
     [Header("Boundary")]
-    public CharacterBoundary charBound;
+    //public CharacterBoundary charBound;
 
     // Weapon
     [Header("Weapon")]
-    public Weapon weapon;
+    private Weapon weapon;
 
     // Time
     [Header("Time Setting")]
     public float timeIdle;
     public float timeAttack;
     public float timeDeath;
+
+    private WeaponID weaponID;
+    private WeaponSkinID weaponSkinID;
+    public Transform weaponHolder;
+
+    public SkinnedMeshRenderer pantRend;
 
     private void OnEnable()
     {
@@ -56,8 +64,24 @@ public class BotStateMachine : Character, IHit, ITarget
 
     public void Init()
     {
-        currentState = MoveState;
+        botCollider.enabled = true;
+        currentState = WaitState;
         currentState.EnterState(bot);
+
+        scale = 1;
+
+        InitWeapon();
+    }
+
+    private void InitWeapon()
+    {
+        if (weapon != null)
+        {
+            Destroy(weapon.gameObject);
+        }
+        weaponID = (WeaponID)Random.Range(0, 3);
+        weaponSkinID = (WeaponSkinID)Random.Range(0, 7);
+        weapon = WeaponManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
     }
 
     private void Update()
@@ -67,19 +91,23 @@ public class BotStateMachine : Character, IHit, ITarget
 
     public void SwitchState(BotBaseState state)
     {
-        currentState.ExitState(bot);
-        currentState = state;
-        currentState.EnterState(bot);
+        if (currentState != state)
+        {
+            currentState.ExitState(bot);
+            currentState = state;
+            currentState.EnterState(bot);
+        }
     }
 
     public override void Death()
     {
+        botCollider.enabled = false;
         SwitchState(DeathState);
     }
 
     public bool CanBeTargeted()
     {
-        if (currentState != DeathState)
+        if (currentState != DeathState || gameObject.activeSelf== false)
         {
             return true;
         }
@@ -97,5 +125,17 @@ public class BotStateMachine : Character, IHit, ITarget
     public void EnableLockTarget()
     {
         underUI.gameObject.SetActive(true);
+    }
+
+    public override void Attack()
+    {
+        StartCoroutine(ThrowWeapon());
+    }
+
+    IEnumerator ThrowWeapon()
+    {
+        yield return new WaitForSeconds(0.2f);
+        weapon.Attack(bot.botModel, bot);
+        weapon.gameObject.SetActive(false);
     }
 }

@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class BotController : Singleton<BotController>
 {
+    [Header("PlayerInfor")]
+    public Player player;
+
     [Header("BotSpawner")]
     public int numOfBots;
     public Transform botsHolder;
     public CharacterBoundary botPrefab;
-    public float nearestBotRange;
-    public float farestBotRange;
 
     public float reviveTime;
+
+    public float xRange;
+    public float zRange;
+
+    public Dictionary<CharacterBoundary, Character> boundToChar = new Dictionary<CharacterBoundary, Character>();
 
     private void Awake()
     {
@@ -54,14 +60,42 @@ public class BotController : Singleton<BotController>
     {
         Vector3 randomPos = GetRandomPos();
         Quaternion randomRot = GetRandomRot();
-        SimplePool.Spawn(botPrefab.gameObject, randomPos, randomRot);
+
+        GameObject botGO = SimplePool.Spawn(botPrefab.gameObject, randomPos, randomRot);
+        Character botChar = botGO.GetComponent<CharacterBoundary>().character;
+        botGO.transform.localScale = Vector3.one;
+        botChar.IncreaseScale(player.GetScale() * Random.Range(0.8f, 1.1f));
     }
 
     private Vector3 GetRandomPos()
     {
-        float randomYDegrees = Random.Range(0, Mathf.PI * 2);
-        float randomX = Mathf.Sin(randomYDegrees) * Random.Range(nearestBotRange, farestBotRange);
-        float randomZ = Mathf.Cos(randomYDegrees) * Random.Range(nearestBotRange, farestBotRange);
+        // 0 is TOP, 1 is BOT, 2 is LEFT, 3 is RIGHT
+        float randomX = 0;
+        float randomZ = 0;
+
+        int randomPos = Random.Range(0, 3);
+        switch (randomPos)
+        {
+            case 0:
+                randomX = xRange;
+                randomZ = Random.Range(-zRange, zRange);
+                break;
+            case 1:
+                randomX = -xRange;
+                randomZ = Random.Range(-zRange, zRange);
+                break;
+            case 2:
+                randomZ = -zRange;
+                randomX = Random.Range(-xRange, xRange);
+                break;
+            case 3:
+                randomZ = zRange;
+                randomX = Random.Range(-xRange, xRange);
+                break;
+
+            default:
+                break;
+        }
 
         return new Vector3(randomX, 0, randomZ);
     }

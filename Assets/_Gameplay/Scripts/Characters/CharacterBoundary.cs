@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class CharacterBoundary : MonoBehaviour
 {
-    public Transform characterTransform;
-    public GameObject thisCharModel;
-    private List<GameObject> targetCharacters = new List<GameObject>();
+    public Transform charBoundTransform;
+    public Character character;
+
+    private List<GameObject> targetCharacters;
     public bool isPlayer;
+
+    private void OnEnable()
+    {
+        OnInit();
+    }
+
+    private void OnInit()
+    {
+        targetCharacters = new List<GameObject>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +27,10 @@ public class CharacterBoundary : MonoBehaviour
             ITarget newITarget = other.gameObject.GetComponent<ITarget>();
             if (newITarget != null && newITarget.CanBeTargeted())
             {
-                targetCharacters.Add(other.gameObject);
+                if (!targetCharacters.Contains(other.gameObject))
+                {
+                    targetCharacters.Add(other.gameObject);
+                }
                 if (isPlayer)
                 {
                     newITarget.EnableLockTarget();
@@ -50,17 +64,28 @@ public class CharacterBoundary : MonoBehaviour
         for (int i = targetCharacters.Count - 1; i >= 0; i--)
         {
             GameObject currentChar = targetCharacters[i];
-            if (!currentChar.GetComponent<ITarget>().CanBeTargeted())
+            ITarget newITarget = currentChar.GetComponent<ITarget>();
+
+            if (Vector3.Distance(charBoundTransform.position, currentChar.transform.position) >= (6.5f * character.GetScale()))
             {
                 targetCharacters.Remove(currentChar);
+                if (targetCharacters.Count == 0) return null;
                 continue;
             }
 
-            newDistance = Vector3.Distance(characterTransform.position, targetCharacters[i].transform.position);
-            if (newDistance < shortestDistance)
+            if (!newITarget.CanBeTargeted() || newITarget == null)
             {
-                shortestDistance = newDistance;
-                targetCharacter = currentChar;
+                targetCharacters.Remove(currentChar);
+                if (targetCharacters.Count == 0) return null;
+            }
+            else
+            {
+                newDistance = Vector3.Distance(charBoundTransform.position, targetCharacters[i].transform.position);
+                if (newDistance < shortestDistance)
+                {
+                    shortestDistance = newDistance;
+                    targetCharacter = currentChar;
+                }
             }
         }
         return targetCharacter;

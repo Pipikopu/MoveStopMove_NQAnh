@@ -8,10 +8,9 @@ public class BotIdleState : BotBaseState
 
     public override void EnterState(BotStateMachine bot)
     {
+        timeCounter = 0;
         bot.agent.speed = 0;
         bot.botAnimator.SetBool(Constant.ANIM_IS_IDLE, true);
-
-        timeCounter = 0;
     }
 
     public override void UpdateState(BotStateMachine bot)
@@ -24,13 +23,8 @@ public class BotIdleState : BotBaseState
         }
         else
         {
-            GameObject targetCharacter = bot.charBound.GetTargetCharacter();
-            if (targetCharacter != null)
+            if (FindTargetCharacter(bot))
             {
-                Vector3 directToTarget = targetCharacter.transform.position - bot.botModel.position;
-                RotateToTargetCharacter(directToTarget, bot.botModel);
-
-                timeCounter = 0;
                 bot.SwitchState(bot.AttackState);
             }
         }
@@ -39,6 +33,20 @@ public class BotIdleState : BotBaseState
     public override void ExitState(BotStateMachine bot)
     {
         bot.botAnimator.SetBool(Constant.ANIM_IS_IDLE, false);
+    }
+
+    private bool FindTargetCharacter(BotStateMachine bot)
+    {
+        GameObject targetCharacter = bot.charBound.GetTargetCharacter();
+        if (targetCharacter != null)
+        {
+            Vector3 directToTarget = targetCharacter.transform.position - bot.botModel.position;
+            RotateToTargetCharacter(directToTarget, bot.botModel);
+
+            timeCounter = 0;
+            return true;
+        }
+        return false;
     }
 
     private void RotateToTargetCharacter(Vector3 directToTarget, Transform botModel)

@@ -7,14 +7,21 @@ public class Weapon : MonoBehaviour
     public GameObject weapon;
     public Bullet bulletPrefab;
 
-    public void Attack(Transform charTransform, GameObject charModel)
+    public MeshRenderer meshRend;
+    protected WeaponSkinID skinID;
+
+    public virtual void InitSkin(WeaponSkinID SkinID) { }
+
+    public void Attack(Transform charTransform, Character character)
     {
         Bullet newBullet = Instantiate(bulletPrefab);
 
         newBullet.SetOriginWeapon(weapon);
-        newBullet.SetOriginCharModel(charModel);
-        newBullet.SetOriginCharacter(charTransform.gameObject);
+        newBullet.SetOriginCharacter(character);
         newBullet.SetDirectionVector(charTransform.forward);
+        newBullet.InitSkin(skinID);
+        newBullet.transform.localScale *= character.GetScale();
+        newBullet.transform.eulerAngles += Vector3.up * charTransform.eulerAngles.y;
         newBullet.transform.position = charTransform.position + Vector3.up * 1f + charTransform.forward * 1f;
-    } 
+    }
 }

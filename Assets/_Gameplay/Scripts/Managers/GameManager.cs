@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager>
             Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
         }
 
+        LevelManager.Ins.SetGameState(Constant.GameState.PAUSE);
         UIManager.Ins.OpenUI(startCanvasId);
     }
 }
