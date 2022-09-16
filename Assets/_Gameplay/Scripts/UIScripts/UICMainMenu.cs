@@ -10,4 +10,10 @@ public class UICMainMenu : UICanvas
         LevelManager.Ins.SetGameState(Constant.GameState.PLAY);
         Close();
     }
+
+    public void OpenWeaponShop()
+    {
+        UIManager.Ins.OpenUI(UIID.UICWeaponShop);
+        Close();
+    }
 }

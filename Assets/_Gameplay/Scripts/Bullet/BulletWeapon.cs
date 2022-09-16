@@ -6,9 +6,10 @@ public class BulletWeapon : Bullet
 {
     protected override void SpecialMove() { }
 
-    public override void InitSkin(WeaponSkinID SkinID)
+    public override void InitSkin(WeaponSkinID skinID)
     {
-        Material weaponSkin = Resources.Load("WeaponSkin/" + SkinID.ToString(), typeof(Material)) as Material;
+        //Material weaponSkin = Resources.Load("WeaponSkin/" + SkinID.ToString(), typeof(Material)) as Material;
+        Material weaponSkin = DataManager.Ins.GetMaterial(skinID);
         var materials = meshRend.sharedMaterials;
         materials[0] = weaponSkin;
         materials[1] = weaponSkin;
