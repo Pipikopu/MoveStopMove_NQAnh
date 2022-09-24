@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-interface ITarget
+public interface ITarget
 {
     public bool CanBeTargeted();
 

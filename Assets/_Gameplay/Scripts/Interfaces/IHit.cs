@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IHit
+public interface IHit
 {
-    public void GetHit();
+    public void GetHit(Character killer);
 }

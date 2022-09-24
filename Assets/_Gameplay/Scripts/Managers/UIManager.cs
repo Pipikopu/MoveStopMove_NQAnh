@@ -11,19 +11,29 @@ public enum UIID
     UICGameplay = 1,
     UICVictory = 2,
     UICFail = 3,
-    UICWeaponShop = 4
+    UICWeaponShop = 4,
+    UICSkinShop = 5
 }
 
 public class UIManager : Singleton<UIManager>
 {
-
+    public List<UIID> startUIID;
+    public List<UICanvas> startUICanvas;
+    
     private Dictionary<UIID, UICanvas> UICanvas = new Dictionary<UIID, UICanvas>();
 
     public Transform CanvasParentTF;
 
     private void Awake()
     {
-        //DontDestroyOnLoad(CanvasParentTF.gameObject);
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < startUIID.Count; i++)
+        {
+            UICanvas[startUIID[i]] = startUICanvas[i];
+        }
     }
 
     #region Canvas

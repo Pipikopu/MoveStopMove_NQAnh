@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    // Basic attributes
     public Transform bulletTransform;
     public Transform bulletRenderTransform;
+    public MeshRenderer meshRend;
+
+    // Origins
     internal GameObject originWeapon;
     internal CharacterBoundary originCharBound;
     internal Character originCharacter;
-    public MeshRenderer meshRend;
 
+    // Movement
     internal Vector3 directionVector = Vector3.zero;
     private Vector3 originPos;
 
+    // Basic variables
     public float range;
     public float speed;
 
@@ -21,23 +26,55 @@ public class Bullet : MonoBehaviour
     {
         if (directionVector != Vector3.zero)
         {
-            if (Vector3.Distance(bulletTransform.position, originPos) <= range * originCharacter.GetScale())
+            // Bullet is in valid range
+            if (Vector3.Distance(bulletTransform.position, originPos) <= range * originCharacter.GetScale() * originCharacter.GetRange())
             {
                 bulletTransform.position += directionVector * speed * Time.deltaTime * originCharacter.GetScale();
                 SpecialMove();
             }
+            // Bullet is outside valid range
             else
             {
                 originWeapon.SetActive(true);
-                Destroy(this.gameObject);
+                SimplePool.Despawn(this.gameObject);
             }
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Constant.TAG_CHAR_MODEL))
+        {
+            if (other.gameObject.GetInstanceID() != originCharacter.gameObject.GetInstanceID())
+            {
+                IHit newIHit = Cache.Ins.GetIHitFromGameObj(other.gameObject);
+                if (newIHit != null)
+                {
+                    OnExecuteHit(newIHit);
+                }
+            }
+        }
+    }
+
+    // Execute a hit
+    private void OnExecuteHit(IHit newIHit)
+    {
+        originWeapon.SetActive(true);
+        originCharacter.IncreaseScore(Random.Range(1, 3));
+        newIHit.GetHit(originCharacter);
+        SimplePool.Despawn(this.gameObject);
+    }
+
+
+    // Specific movement for each type of bullet
     protected virtual void SpecialMove() { }
 
+
+    // Initialize skin for each buller
     public virtual void InitSkin(WeaponSkinID SkinID) { }
 
+
+    #region SetInitValues
     public void SetOriginWeapon(GameObject weapon)
     {
         originWeapon = weapon;
@@ -49,27 +86,17 @@ public class Bullet : MonoBehaviour
         originPos = originCharacter.transform.position;
     }
 
+    public void SetOriginCharBound(CharacterBoundary charBound)
+    {
+        originCharBound = charBound;
+    }
+
     public void SetDirectionVector(Vector3 vector)
     {
         directionVector = vector;
     }
+    #endregion
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(Constant.TAG_CHAR_MODEL))
-        {
-            if (other.gameObject.GetInstanceID() != originCharacter.gameObject.GetInstanceID())
-            {
-                originWeapon.SetActive(true);
-                originCharacter.IncreaseScale(1.1f);
-                originCharacter.IncreaseScore(1);
-                IHit newIHit = other.gameObject.GetComponent<IHit>();
-                if (newIHit != null)
-                {
-                    newIHit.GetHit();
-                    Destroy(this.gameObject);
-                }
-            }
-        }
-    }
+
+
 }

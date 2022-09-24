@@ -10,11 +10,18 @@ public class Character : MonoBehaviour, IHit
 
     protected float scale = 1;
     protected int score = 0;
+    protected float range = 1;
+
+    protected int scoreToScale = 2;
+
+    protected new string name;
 
     private void Start()
     {
         scale = 1;
         score = 0;
+        range = 1;
+        scoreToScale = 2;
         scoreText.text = score.ToString();
     }
 
@@ -25,6 +32,8 @@ public class Character : MonoBehaviour, IHit
 
     private void OnInit()
     {
+        scale = 1;
+        charBound.transform.localScale = Vector3.one;
     }
 
     public void IncreaseScale(float scaleRatio)
@@ -41,6 +50,14 @@ public class Character : MonoBehaviour, IHit
     {
         score += increaseValue;
         scoreText.text = score.ToString();
+
+        scoreToScale -= increaseValue;
+
+        if (scoreToScale <= 0)
+        {
+            IncreaseScale(1.1f);
+            scoreToScale = 2;
+        }
     }
 
     public float GetScale()
@@ -48,14 +65,43 @@ public class Character : MonoBehaviour, IHit
         return scale;
     }
 
+    public virtual void IncreaseRange(float increaseValue) { }
+
+    public float GetRange()
+    {
+        return range;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public void SetScore(int newScore)
+    {
+        score = newScore;
+        scoreText.text = score.ToString();
+        scoreToScale = 3;
+    }
+
+    public void SetName(string newName)
+    {
+        name = newName;
+    }
+
+    public string GetName()
+    {
+        return name;
+    }
+
     public virtual void Move() { }
 
     public virtual void Attack() { }
 
-    public virtual void Death() { }
+    public virtual void Death(Character killer) { }
 
-    public virtual void GetHit()
+    public virtual void GetHit(Character killer)
     {
-        Death();
+        Death(killer);
     }
 }

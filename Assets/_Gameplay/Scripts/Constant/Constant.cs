@@ -19,5 +19,5 @@ public static class Constant
 
     public const string ANIM_ATTACK = "Attack";
 
-    public enum GameState { PAUSE, PLAY, END};
+    public enum GameState { PAUSE, PLAY, CHOOSESKIN, END};
 }

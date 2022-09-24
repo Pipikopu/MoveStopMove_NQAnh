@@ -18,9 +18,7 @@ public class BotAttackState : BotBaseState
     {
         timeCounter += Time.deltaTime;
         if (timeCounter > bot.timeAttack)
-        {
-            bot.SwitchState(bot.IdleState);
-        }
+            bot.SwitchState(bot.MoveState);
     }
 
     public override void ExitState(BotStateMachine bot)

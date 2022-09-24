@@ -964,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charBound: {fileID: 3807601877254056610}
   scoreText: {fileID: 3807601877160331112}
+  range: 1
   bot: {fileID: 3807601876216330519}
   botTransform: {fileID: 3807601877254056612}
   botModel: {fileID: 8191455590075409556}
@@ -978,3 +979,4 @@ MonoBehaviour:
   timeAttack: 1.5
   timeDeath: 1.5
   weaponHolder: {fileID: 3807601877051806999}
+  pantRend: {fileID: 0}

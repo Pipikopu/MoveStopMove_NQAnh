@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BotDeathState : BotBaseState
 {
-    private float timeCounter;
+    private float timeCounter = 0;
 
     public override void EnterState(BotStateMachine bot)
     {
@@ -21,8 +21,8 @@ public class BotDeathState : BotBaseState
         timeCounter += Time.deltaTime;
         if (timeCounter > bot.timeDeath)
         {
-            timeCounter = 0;
             BotController.Ins.ReuseBot(bot.botTransform.gameObject);
+            bot.SwitchState(bot.AfterDeathState);
         }
     }
 

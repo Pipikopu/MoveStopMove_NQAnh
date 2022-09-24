@@ -10,6 +10,13 @@ public class JoytickController : MonoBehaviour, IDragHandler, IPointerDownHandle
     public Image joystickImage;
     private Vector2 posInput;
 
+    public void OnEnable()
+    {
+        posInput = Vector2.zero;
+        joystickBackgroundImage.enabled = false;
+        joystickImage.enabled = false;
+    }
+
     public void OnDrag(PointerEventData evenData)
     {
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(

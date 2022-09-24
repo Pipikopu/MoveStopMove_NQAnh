@@ -4,28 +4,66 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
+    public List<Weapon> weaponPrefabs;
+
     public List<Material> weaponMaterials;
 
-    public Material GetMaterial(WeaponSkinID weaponSkinId)
+    public List<Material> pantMaterials;
+
+    public List<Item> hatPrefabs;
+
+    public List<Item> shieldPrefabs;
+
+    public List<Material> bodyMaterials;
+
+    public List<Item> tailItems;
+
+    public List<Item> wingItems;
+
+    public List<Set> setsList;
+
+    public Material GetWeaponMaterial(WeaponSkinID weaponSkinId)
     {
-        switch (weaponSkinId)
-        {
-            case WeaponSkinID.Hammer_1:
-                return weaponMaterials[0];
-            case WeaponSkinID.Hammer_2:
-                return weaponMaterials[0];
-            case WeaponSkinID.Candy0_1:
-                return weaponMaterials[0];
-            case WeaponSkinID.Candy0_2:
-                return weaponMaterials[0];
-            case WeaponSkinID.Candy1_1:
-                return weaponMaterials[0];
-            case WeaponSkinID.Candy2_1:
-                return weaponMaterials[0];
-            case WeaponSkinID.Axe0:
-                return weaponMaterials[0];
-            default:
-                return null;
-        }
+        return weaponMaterials[(int)weaponSkinId];
+    }
+
+    public Weapon GetWeapon(WeaponID weaponID)
+    {
+        return weaponPrefabs[(int)weaponID];
+    }
+
+    public Material GetPantMaterial(PantSkinID pantSkinID)
+    {
+        return pantMaterials[(int)pantSkinID];
+    }
+
+    public Item GetHatItem(HatSkinID hatSkinID)
+    {
+        return hatPrefabs[(int)hatSkinID];
+    }
+
+    public Item GetShieldItem(ShieldSkinID shieldSkinID)
+    {
+        return shieldPrefabs[(int)shieldSkinID];
+    }
+
+    public Material GetBodyMaterial(BodyMaterialID bodyMaterialID)
+    {
+        return bodyMaterials[(int)bodyMaterialID];
+    }
+
+    public Item GetTailItem(TailSkinID tailSkinID)
+    {
+        return tailItems[(int)tailSkinID];
+    }
+
+    public Item GetWingItem(WingSkinID wingSkinID)
+    {
+        return wingItems[(int)wingSkinID];
+    }
+
+    public Set GetSet(SetSkinID setSkinID)
+    {
+        return setsList[(int)setSkinID];
     }
 }

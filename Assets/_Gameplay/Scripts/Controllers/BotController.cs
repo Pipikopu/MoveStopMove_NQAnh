@@ -19,6 +19,8 @@ public class BotController : Singleton<BotController>
 
     public Dictionary<CharacterBoundary, Character> boundToChar = new Dictionary<CharacterBoundary, Character>();
 
+    private string[] names = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
+
     private void Awake()
     {
         for (int i = 0; i < numOfBots; i++)
@@ -32,8 +34,9 @@ public class BotController : Singleton<BotController>
         SpawnAllBots();
     }
 
-    private void SpawnAllBots()
+    public void SpawnAllBots()
     {
+        SimplePool.CollectAll();
         for (int i = 0; i < numOfBots; i++)
         {
             SpawnBot();
@@ -49,10 +52,21 @@ public class BotController : Singleton<BotController>
     {
         SimplePool.Despawn(bot);
         int remainNumOfBots = LevelManager.Ins.GetRemainNumOfBots();
+        int numActiveBots = SimplePool.GetNumOfActiveObjs(botPrefab.gameObject);
 
         if (remainNumOfBots >= numOfBots)
         {
             SpawnBot();
+        }
+        else
+        {
+            if (numActiveBots < remainNumOfBots)
+            {
+                for (int i = 0; i < remainNumOfBots - numActiveBots; i++)
+                {
+                    SpawnBot();
+                }
+            }
         }
     }
 
@@ -62,9 +76,29 @@ public class BotController : Singleton<BotController>
         Quaternion randomRot = GetRandomRot();
 
         GameObject botGO = SimplePool.Spawn(botPrefab.gameObject, randomPos, randomRot);
-        Character botChar = botGO.GetComponent<CharacterBoundary>().character;
+
         botGO.transform.localScale = Vector3.one;
-        botChar.IncreaseScale(player.GetScale() * Random.Range(0.8f, 1.1f));
+        Character botChar = botGO.GetComponent<CharacterBoundary>().character;
+
+        float botScale = Random.Range(0.9f, 1.1f);
+        botChar.IncreaseScale(player.GetScale() * botScale);
+
+        if (botScale < 1)
+        {
+            if (player.GetScore() <= 2)
+            {
+                botChar.SetScore(1);
+            }
+            else
+            {
+                botChar.SetScore(player.GetScore() - Random.Range(1, 2));
+            }
+        }
+        else
+        {
+            botChar.SetScore(player.GetScore() + Random.Range(1, 2));
+        }
+        botChar.SetName(names[Random.Range(0, names.Length - 1)]);
     }
 
     private Vector3 GetRandomPos()

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotStateMachine : Character, ITarget
+public class BotStateMachine : Character, ITarget, IHit
 {
     public BotStateMachine bot;
 
     // StateMachine
     BotBaseState currentState;
-    public BotStartState StartState = new BotStartState();
     public BotIdleState IdleState = new BotIdleState();
     public BotMoveState MoveState = new BotMoveState();
     public BotAttackState AttackState = new BotAttackState();
     public BotDeathState DeathState = new BotDeathState();
     public BotWaitState WaitState = new BotWaitState();
+    public BotAfterDeathState AfterDeathState = new BotAfterDeathState();
+    private bool switchingState;
 
     // Bot Variables
     [Header("Bot Setting")]
@@ -37,10 +38,6 @@ public class BotStateMachine : Character, ITarget
     [Header("Animator")]
     public Animator botAnimator;
 
-    // Character Boundary
-    [Header("Boundary")]
-    //public CharacterBoundary charBound;
-
     // Weapon
     [Header("Weapon")]
     private Weapon weapon;
@@ -51,10 +48,12 @@ public class BotStateMachine : Character, ITarget
     public float timeAttack;
     public float timeDeath;
 
+    [Header("Weapon")]
     private WeaponID weaponID;
     private WeaponSkinID weaponSkinID;
     public Transform weaponHolder;
 
+    [Header("Skin")]
     public SkinnedMeshRenderer pantRend;
 
     private void OnEnable()
@@ -67,7 +66,7 @@ public class BotStateMachine : Character, ITarget
         botCollider.enabled = true;
         currentState = WaitState;
         currentState.EnterState(bot);
-
+        switchingState = false;
         scale = 1;
 
         InitWeapon();
@@ -81,25 +80,30 @@ public class BotStateMachine : Character, ITarget
         }
         weaponID = (WeaponID)Random.Range(0, 3);
         weaponSkinID = (WeaponSkinID)Random.Range(0, 7);
-        weapon = WeaponManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
+        weapon = PrefabManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
     }
 
     private void Update()
     {
-        currentState.UpdateState(bot);
+        if (!switchingState)
+        {
+            currentState.UpdateState(bot);
+        }
     }
 
     public void SwitchState(BotBaseState state)
     {
         if (currentState != state)
         {
+            switchingState = true;
             currentState.ExitState(bot);
             currentState = state;
-            currentState.EnterState(bot);
+            state.EnterState(bot);
+            switchingState = false;
         }
     }
 
-    public override void Death()
+    public override void Death(Character killer)
     {
         botCollider.enabled = false;
         SwitchState(DeathState);
@@ -108,13 +112,9 @@ public class BotStateMachine : Character, ITarget
     public bool CanBeTargeted()
     {
         if (currentState != DeathState || gameObject.activeSelf== false)
-        {
             return true;
-        }
         else
-        {
             return false;
-        }
     }
 
     public void DisableLockTarget()

@@ -275,7 +275,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279464347084757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7735845242955545708}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279464379535840
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +336,7 @@ GameObject:
   - component: {fileID: 6736279464414413286}
   - component: {fileID: 6736279464414413284}
   - component: {fileID: 6736279464414413287}
-  - component: {fileID: 6736279464414413285}
+  - component: {fileID: 276699983}
   m_Layer: 5
   m_Name: Candy_1Tab
   m_TagString: Untagged
@@ -434,7 +446,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279464414413285
+--- !u!114 &276699983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -443,11 +455,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279464414413282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279464637637492}
-  background: {fileID: 6736279464414413284}
+  tabGroup: {fileID: 357342727}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:
@@ -598,7 +609,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279464482860428}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3559459811700744090}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279464486224576
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279464637637493}
-  - component: {fileID: 6736279464637637492}
+  - component: {fileID: 357342727}
   m_Layer: 5
   m_Name: TabArea
   m_TagString: Untagged
@@ -752,7 +775,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6736279464637637492
+--- !u!114 &357342727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -761,14 +784,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279464637637490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae6db120c22c42bcaa71c7f47a63edc, type: 3}
+  m_Script: {fileID: 11500000, guid: df13c91174f874424aafd3a2a4f067ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tabButtons:
-  - {fileID: 6736279464414413285}
-  - {fileID: 6736279465897728110}
-  - {fileID: 6736279465367943142}
-  - {fileID: 6736279466354432168}
+  - {fileID: 276699983}
+  - {fileID: 1051406372}
+  - {fileID: 2069680974}
+  - {fileID: 1547378719}
   selectedTab: {fileID: 0}
   objectsToSwap:
   - {fileID: 6736279465205011503}
@@ -784,6 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279464658063740}
+  - component: {fileID: 4124215204571389576}
   m_Layer: 5
   m_Name: Hammer_1
   m_TagString: Untagged
@@ -812,6 +836,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4124215204571389576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279464658063741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 0
+  weaponSkinId: 0
 --- !u!1 &6736279464743417634
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,7 +859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279464743417637}
-  - component: {fileID: 6736279464743417636}
+  - component: {fileID: 1247575625}
   m_Layer: 5
   m_Name: TabArea
   m_TagString: Untagged
@@ -849,7 +887,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6736279464743417636
+--- !u!114 &1247575625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -858,11 +896,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279464743417634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae6db120c22c42bcaa71c7f47a63edc, type: 3}
+  m_Script: {fileID: 11500000, guid: df13c91174f874424aafd3a2a4f067ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tabButtons:
-  - {fileID: 6736279465698154797}
+  - {fileID: 1196895221}
   selectedTab: {fileID: 0}
   objectsToSwap:
   - {fileID: 6736279465697087481}
@@ -954,8 +992,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279464819397278}
+  - component: {fileID: 3559459811700744090}
   m_Layer: 5
-  m_Name: Hammer_3
+  m_Name: Candy_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -982,6 +1021,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3559459811700744090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279464819397279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 1
+  weaponSkinId: 4
 --- !u!1 &6736279464899196784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1188,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 300 Coins
+  m_Text: Use
 --- !u!1 &6736279464928538754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1309,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279464928538759}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1539469123088216722}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279464993964275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,7 +1479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 300 Coins
+  m_Text: Use
 --- !u!1 &6736279465162255326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,8 +1621,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279465186297814}
+  - component: {fileID: 388017263246866898}
   m_Layer: 5
-  m_Name: Hammer_2
+  m_Name: Candy_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1584,6 +1650,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &388017263246866898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279465186297815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 1
+  weaponSkinId: 3
 --- !u!1 &6736279465199538316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,7 +1742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 300 Coins
+  m_Text: Use
 --- !u!1 &6736279465205011503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,8 +1752,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279465205011502}
+  - component: {fileID: 6667982677861136294}
   m_Layer: 5
-  m_Name: Hammer_1
+  m_Name: Candy_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1700,6 +1781,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6667982677861136294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279465205011503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 1
+  weaponSkinId: 2
 --- !u!1 &6736279465230398759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,7 +2047,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279465248389114}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4124215204571389576}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279465255016735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,7 +2213,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 Coins
+  m_Text: Use
 --- !u!1 &6736279465367943140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,7 +2226,7 @@ GameObject:
   - component: {fileID: 6736279465367943147}
   - component: {fileID: 6736279465367943144}
   - component: {fileID: 6736279465367943145}
-  - component: {fileID: 6736279465367943142}
+  - component: {fileID: 2069680974}
   m_Layer: 5
   m_Name: 'Candy_3Tab '
   m_TagString: Untagged
@@ -2229,7 +2336,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279465367943142
+--- !u!114 &2069680974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2238,11 +2345,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279465367943140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279464637637492}
-  background: {fileID: 6736279465367943144}
+  tabGroup: {fileID: 357342727}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:
@@ -2469,7 +2575,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279465411778233}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4227593670193872979}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279465441470846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,8 +2597,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279465441470785}
+  - component: {fileID: 1539469123088216722}
   m_Layer: 5
-  m_Name: Hammer_4
+  m_Name: Candy_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2507,6 +2626,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1539469123088216722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279465441470846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 1
+  weaponSkinId: 5
 --- !u!1 &6736279465495750968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,7 +2793,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 Coins
+  m_Text: Use
 --- !u!1 &6736279465504822437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,6 +2803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279465504822436}
+  - component: {fileID: 4227593670193872979}
   m_Layer: 5
   m_Name: Hammer_2
   m_TagString: Untagged
@@ -2698,6 +2832,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4227593670193872979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279465504822437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 0
+  weaponSkinId: 1
 --- !u!1 &6736279465512344992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,7 +2924,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 300 Coins
+  m_Text: Use
 --- !u!1 &6736279465520991210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,7 +2944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6736279465520991213
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2876,6 +3024,7 @@ MonoBehaviour:
   - {fileID: 6736279465401266083}
   - {fileID: 6736279464554182098}
   - {fileID: 6736279465390855063}
+  player: {fileID: 0}
 --- !u!114 &1465199245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2889,6 +3038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
+  player: {fileID: 0}
 --- !u!1 &6736279465586022664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,7 +3192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 Coins
+  m_Text: Use
 --- !u!1 &6736279465697087481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,6 +3202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279465697087480}
+  - component: {fileID: 7735845242955545708}
   m_Layer: 5
   m_Name: Arrow_1
   m_TagString: Untagged
@@ -3080,6 +3231,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7735845242955545708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736279465697087481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35b7b0aa7af34de495316a2c04cbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponId: 2
+  weaponSkinId: 6
 --- !u!1 &6736279465698154794
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,7 +3257,7 @@ GameObject:
   - component: {fileID: 6736279465698154798}
   - component: {fileID: 6736279465698154796}
   - component: {fileID: 6736279465698154799}
-  - component: {fileID: 6736279465698154797}
+  - component: {fileID: 1196895221}
   m_Layer: 5
   m_Name: Arrow_1Tab
   m_TagString: Untagged
@@ -3202,7 +3367,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279465698154797
+--- !u!114 &1196895221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3211,11 +3376,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279465698154794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279464743417636}
-  background: {fileID: 6736279465698154796}
+  tabGroup: {fileID: 1247575625}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:
@@ -3255,7 +3419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736279465716861923}
-  - component: {fileID: 6736279465716861922}
+  - component: {fileID: 2116003925}
   m_Layer: 5
   m_Name: TabArea
   m_TagString: Untagged
@@ -3284,7 +3448,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6736279465716861922
+--- !u!114 &2116003925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3293,12 +3457,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279465716861920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae6db120c22c42bcaa71c7f47a63edc, type: 3}
+  m_Script: {fileID: 11500000, guid: df13c91174f874424aafd3a2a4f067ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tabButtons:
-  - {fileID: 6736279466347313559}
-  - {fileID: 6736279466202526081}
+  - {fileID: 1025214764}
+  - {fileID: 1018578547}
   selectedTab: {fileID: 0}
   objectsToSwap:
   - {fileID: 6736279464658063741}
@@ -3423,7 +3587,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279465781575254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6667982677861136294}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279465845142525
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,7 +3766,7 @@ GameObject:
   - component: {fileID: 6736279465897728115}
   - component: {fileID: 6736279465897728112}
   - component: {fileID: 6736279465897728113}
-  - component: {fileID: 6736279465897728110}
+  - component: {fileID: 1051406372}
   m_Layer: 5
   m_Name: Candy_2Tab
   m_TagString: Untagged
@@ -3700,7 +3876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279465897728110
+--- !u!114 &1051406372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3709,11 +3885,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279465897728108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279464637637492}
-  background: {fileID: 6736279465897728112}
+  tabGroup: {fileID: 357342727}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:
@@ -4164,7 +4339,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6736279466154803480}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 388017263246866898}
+        m_TargetAssemblyTypeName: WeaponShopItem, Assembly-CSharp
+        m_MethodName: ChooseWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736279466157663825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,7 +4514,7 @@ GameObject:
   - component: {fileID: 6736279466202526143}
   - component: {fileID: 6736279466202526140}
   - component: {fileID: 6736279466202526142}
-  - component: {fileID: 6736279466202526081}
+  - component: {fileID: 1018578547}
   m_Layer: 5
   m_Name: Hammer_2Tab
   m_TagString: Untagged
@@ -4437,7 +4624,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279466202526081
+--- !u!114 &1018578547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4446,11 +4633,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279466202526138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279465716861922}
-  background: {fileID: 6736279466202526140}
+  tabGroup: {fileID: 2116003925}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:
@@ -4643,7 +4829,7 @@ GameObject:
   - component: {fileID: 6736279466347313557}
   - component: {fileID: 6736279466347313554}
   - component: {fileID: 6736279466347313556}
-  - component: {fileID: 6736279466347313559}
+  - component: {fileID: 1025214764}
   m_Layer: 5
   m_Name: Hammer_1Tab
   m_TagString: Untagged
@@ -4753,7 +4939,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279466347313559
+--- !u!114 &1025214764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4762,11 +4948,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279466347313552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279465716861922}
-  background: {fileID: 6736279466347313554}
+  tabGroup: {fileID: 2116003925}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:
@@ -4809,7 +4994,7 @@ GameObject:
   - component: {fileID: 6736279466354432173}
   - component: {fileID: 6736279466354432170}
   - component: {fileID: 6736279466354432171}
-  - component: {fileID: 6736279466354432168}
+  - component: {fileID: 1547378719}
   m_Layer: 5
   m_Name: Candy_4Tab
   m_TagString: Untagged
@@ -4919,7 +5104,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6736279466354432168
+--- !u!114 &1547378719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4928,11 +5113,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736279466354432166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9b748bd55d24d9891a78c1b406db14, type: 3}
+  m_Script: {fileID: 11500000, guid: 92019a095ece942b8b9e9a3f85325016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabGroup: {fileID: 6736279464637637492}
-  background: {fileID: 6736279466354432170}
+  tabGroup: {fileID: 357342727}
   onTabSelected:
     m_PersistentCalls:
       m_Calls:

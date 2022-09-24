@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SimplePool
 {
-    static int DEFAULT_AMOUNT = 10;
+    static int DEFAULT_AMOUNT = 1;
     static Dictionary<GameObject, Pool> poolObjects = new Dictionary<GameObject, Pool>();
     static Dictionary<GameObject, Pool> poolParents = new Dictionary<GameObject, Pool>();
 
@@ -113,6 +113,11 @@ public static class SimplePool
     public static Vector3 GetFirstAcObjPos(GameObject prefab, Vector3 defaultPosition)
     {
         return poolObjects[prefab].GetFirstAcObjPos(defaultPosition);
+    }
+
+    public static int GetNumOfActiveObjs(GameObject prefab)
+    {
+        return poolObjects[prefab].GetNumOfActiveObjs();
     }
 
     public class Pool
@@ -259,6 +264,11 @@ public static class SimplePool
             {
                 return defaultPosition;
             }
+        }
+
+        public int GetNumOfActiveObjs()
+        {
+            return activeObjs.Count;
         }
     }
 }

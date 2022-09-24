@@ -8,12 +8,20 @@ public class UICMainMenu : UICanvas
     {
         UIManager.Ins.OpenUI(UIID.UICGameplay);
         LevelManager.Ins.SetGameState(Constant.GameState.PLAY);
+        CinemachineManager.Ins.SwitchToPlayCam();
         Close();
     }
 
     public void OpenWeaponShop()
     {
         UIManager.Ins.OpenUI(UIID.UICWeaponShop);
+        Close();
+    }
+
+    public void OpenSkinShop()
+    {
+        UIManager.Ins.OpenUI(UIID.UICSkinShop);
+        CinemachineManager.Ins.SwitchToSkinShopCam();
         Close();
     }
 }

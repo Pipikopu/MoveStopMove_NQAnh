@@ -13,8 +13,12 @@ public class BulletHammer : Bullet
 
     public override void InitSkin(WeaponSkinID skinID)
     {
-        //Material weaponSkin = Resources.Load("WeaponSkin/" + SkinID.ToString(), typeof(Material)) as Material;
-        Material weaponSkin = DataManager.Ins.GetMaterial(skinID);
+        Material weaponSkin = DataManager.Ins.GetWeaponMaterial(skinID);
+        ChangeRendMaterial(weaponSkin);
+    }
+
+    private void ChangeRendMaterial(Material weaponSkin)
+    {
         var materials = meshRend.sharedMaterials;
         materials[0] = weaponSkin;
         materials[1] = weaponSkin;

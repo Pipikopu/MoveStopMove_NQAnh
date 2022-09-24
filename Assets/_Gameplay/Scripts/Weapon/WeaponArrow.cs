@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class WeaponArrow : Weapon
 {
-    public override void InitSkin(WeaponSkinID skinID)
+    public override void InitSkin(WeaponSkinID _skinID)
     {
-        //skinID = SkinID;
-        //Material weaponSkin = Resources.Load("WeaponSkin/" + SkinID.ToString(), typeof(Material)) as Material;
-        Material weaponSkin = DataManager.Ins.GetMaterial(skinID);
+        skinID = _skinID;
+        ChangeRendMat(skinID);
+    }
+
+    private void ChangeRendMat(WeaponSkinID skinID)
+    {
+        Material weaponSkin = DataManager.Ins.GetWeaponMaterial(skinID);
         var materials = meshRend.sharedMaterials;
         materials[0] = weaponSkin;
         materials[1] = weaponSkin;
