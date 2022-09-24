@@ -14,7 +14,7 @@ public class HatShopItem : MonoBehaviour
 
     public void ChooseHat()
     {
-        PlayerPrefs.SetInt("SelectedHat", (int)hatSkinID);
+        PlayerPrefs.SetInt(Constant.SELECTED_HAT, (int)hatSkinID);
         HatShop.Ins.ChooseHat();
     }
 }

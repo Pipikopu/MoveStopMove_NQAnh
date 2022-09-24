@@ -13,7 +13,7 @@ public class PantShopItem : MonoBehaviour
 
     public void ChoosePant()
     {
-        PlayerPrefs.SetInt("SelectedPant", (int)pantSkinID);
+        PlayerPrefs.SetInt(Constant.SELECTED_PANT, (int)pantSkinID);
         PantShop.Ins.ChoosePant();
     }
 }

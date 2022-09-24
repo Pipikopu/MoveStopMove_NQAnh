@@ -159,13 +159,13 @@ public class Player : Character, ITarget
         if (weapon != null)
             Destroy(weapon.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedWeapon"))
-            weaponID = (WeaponID)PlayerPrefs.GetInt("SelectedWeapon");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON))
+            weaponID = (WeaponID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON);
         else
             weaponID = (WeaponID)0;
 
-        if (PlayerPrefs.HasKey("SelectedWeaponSkin"))
-            weaponSkinID = (WeaponSkinID)PlayerPrefs.GetInt("SelectedWeaponSkin");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON_SKIN))
+            weaponSkinID = (WeaponSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON_SKIN);
         else
             weaponSkinID = (WeaponSkinID)0;
 
@@ -309,8 +309,8 @@ public class Player : Character, ITarget
     #region Initialize Skin
     private void InitPant()
     {
-        if (PlayerPrefs.HasKey("SelectedPant"))
-            pantSkinID = (PantSkinID)PlayerPrefs.GetInt("SelectedPant");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_PANT))
+            pantSkinID = (PantSkinID)PlayerPrefs.GetInt(Constant.SELECTED_PANT);
         else
             pantSkinID = (PantSkinID)0;
 
@@ -325,8 +325,8 @@ public class Player : Character, ITarget
         if (hatItem != null)
             Destroy(hatItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedHat"))
-            hatSkinID = (HatSkinID)PlayerPrefs.GetInt("SelectedHat");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_HAT))
+            hatSkinID = (HatSkinID)PlayerPrefs.GetInt(Constant.SELECTED_HAT);
         else
             hatSkinID = (HatSkinID)0;
 
@@ -338,8 +338,8 @@ public class Player : Character, ITarget
         if (shieldItem != null)
             Destroy(shieldItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedShield"))
-            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt("SelectedShield");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_SHIELD))
+            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt(Constant.SELECTED_SHIELD);
         else
             shieldSkinID = (ShieldSkinID)0;
 
@@ -348,8 +348,8 @@ public class Player : Character, ITarget
 
     private void InitBody()
     {
-        if (PlayerPrefs.HasKey("SelectedBody"))
-            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt("SelectedBody");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_BODY))
+            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt(Constant.SELECTED_BODY);
         else
             bodyMatID = (BodyMaterialID)0;
 
@@ -364,8 +364,8 @@ public class Player : Character, ITarget
         if (tailItem != null)
             Destroy(tailItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedTail"))
-            tailSkinID = (TailSkinID)PlayerPrefs.GetInt("SelectedTail");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_TAIL))
+            tailSkinID = (TailSkinID)PlayerPrefs.GetInt(Constant.SELECTED_TAIL);
         else
             tailSkinID = (TailSkinID)0;
 
@@ -377,8 +377,8 @@ public class Player : Character, ITarget
         if (wingItem != null)
             Destroy(wingItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedWing"))
-            wingSkinID = (WingSkinID)PlayerPrefs.GetInt("SelectedWing");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_WING))
+            wingSkinID = (WingSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WING);
         else
             wingSkinID = (WingSkinID)0;
 
@@ -393,13 +393,13 @@ public class Player : Character, ITarget
         if (weapon != null)
             Destroy(weapon.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedWeapon"))
-            weaponID = (WeaponID)PlayerPrefs.GetInt("SelectedWeapon");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON))
+            weaponID = (WeaponID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON);
         else
             weaponID = (WeaponID)0;
 
-        if (PlayerPrefs.HasKey("SelectedWeaponSkin"))
-            weaponSkinID = (WeaponSkinID)PlayerPrefs.GetInt("SelectedWeaponSkin");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON_SKIN))
+            weaponSkinID = (WeaponSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON_SKIN);
         else
             weaponSkinID = (WeaponSkinID)0;
 
@@ -408,8 +408,8 @@ public class Player : Character, ITarget
 
     public void ChangePant()
     {
-        if (PlayerPrefs.HasKey("SelectedPant"))
-            pantSkinID = (PantSkinID)PlayerPrefs.GetInt("SelectedPant");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_PANT))
+            pantSkinID = (PantSkinID)PlayerPrefs.GetInt(Constant.SELECTED_PANT);
         else
             pantSkinID = (PantSkinID)0;
 
@@ -432,8 +432,8 @@ public class Player : Character, ITarget
         if (hatItem != null)
             Destroy(hatItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedHat"))
-            hatSkinID = (HatSkinID)PlayerPrefs.GetInt("SelectedHat");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_HAT))
+            hatSkinID = (HatSkinID)PlayerPrefs.GetInt(Constant.SELECTED_HAT);
         else
             hatSkinID = (HatSkinID)0;
 
@@ -453,8 +453,8 @@ public class Player : Character, ITarget
         if (shieldItem != null)
             Destroy(shieldItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedShield"))
-            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt("SelectedShield");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_SHIELD))
+            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt(Constant.SELECTED_SHIELD);
         else
             shieldSkinID = (ShieldSkinID)0;
 
@@ -471,8 +471,8 @@ public class Player : Character, ITarget
 
     public void ChangeBody()
     {
-        if (PlayerPrefs.HasKey("SelectedBody"))
-            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt("SelectedBody");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_BODY))
+            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt(Constant.SELECTED_BODY);
         else
             bodyMatID = (BodyMaterialID)0;
 
@@ -495,8 +495,8 @@ public class Player : Character, ITarget
         if (tailItem != null)
             Destroy(tailItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedTail"))
-            tailSkinID = (TailSkinID)PlayerPrefs.GetInt("SelectedTail");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_TAIL))
+            tailSkinID = (TailSkinID)PlayerPrefs.GetInt(Constant.SELECTED_TAIL);
         else
             tailSkinID = (TailSkinID)0;
 
@@ -516,8 +516,8 @@ public class Player : Character, ITarget
         if (wingItem != null)
             Destroy(wingItem.gameObject);
 
-        if (PlayerPrefs.HasKey("SelectedWing"))
-            wingSkinID = (WingSkinID)PlayerPrefs.GetInt("SelectedWing");
+        if (PlayerPrefs.HasKey(Constant.SELECTED_WING))
+            wingSkinID = (WingSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WING);
         else
             wingSkinID = (WingSkinID)0;
 

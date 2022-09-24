@@ -15,7 +15,7 @@ public class ShieldShopItem : MonoBehaviour
 
     public void ChooseShield()
     {
-        PlayerPrefs.SetInt("SelectedShield", (int)shieldSkinID);
+        PlayerPrefs.SetInt(Constant.SELECTED_SHIELD, (int)shieldSkinID);
         ShieldShop.Ins.ChooseShield();
     }
 }

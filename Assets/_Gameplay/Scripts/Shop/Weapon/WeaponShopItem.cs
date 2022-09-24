@@ -10,8 +10,8 @@ public class WeaponShopItem : MonoBehaviour
 
     public void ChooseWeapon()
     {
-        PlayerPrefs.SetInt("SelectedWeapon", (int)weaponId);
-        PlayerPrefs.SetInt("SelectedWeaponSkin", (int)weaponSkinId);
+        PlayerPrefs.SetInt(Constant.SELECTED_WEAPON, (int)weaponId);
+        PlayerPrefs.SetInt(Constant.SELECTED_WEAPON_SKIN, (int)weaponSkinId);
         WeaponShop.Ins.ChooseWeapon();
     }
 }
