@@ -70,7 +70,7 @@ public class Player : Character, ITarget
     // FollowingUI
     [Header("Following UI")]
     public GameObject underUI;
-    public GameObject upperUI;
+    public GameObject indicator;
 
     private void OnEnable()
     {
@@ -139,7 +139,6 @@ public class Player : Character, ITarget
     private void ActivateUI(bool activate)
     {
         underUI.SetActive(activate);
-        upperUI.SetActive(activate);
         joystickCanvas.gameObject.SetActive(activate);
     }
 

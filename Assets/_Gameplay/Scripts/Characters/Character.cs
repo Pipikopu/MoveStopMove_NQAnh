@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour, IHit
 {
+    public Character character;
     public CharacterBoundary charBound;
-    public TextMesh scoreText;
 
     protected float scale = 1;
     protected int score = 0;
@@ -22,7 +22,6 @@ public class Character : MonoBehaviour, IHit
         score = 0;
         range = 1;
         scoreToScale = 2;
-        scoreText.text = score.ToString();
     }
 
     private void OnEnable()
@@ -49,7 +48,6 @@ public class Character : MonoBehaviour, IHit
     public void IncreaseScore(int increaseValue)
     {
         score += increaseValue;
-        scoreText.text = score.ToString();
 
         scoreToScale -= increaseValue;
 
@@ -80,7 +78,6 @@ public class Character : MonoBehaviour, IHit
     public void SetScore(int newScore)
     {
         score = newScore;
-        scoreText.text = score.ToString();
         scoreToScale = 3;
     }
 

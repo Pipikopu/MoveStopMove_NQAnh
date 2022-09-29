@@ -6,7 +6,8 @@ public class Cache : Singleton<Cache>
 {
     private Dictionary<GameObject, IHit> objToIHit = new Dictionary<GameObject, IHit>();
     private Dictionary<GameObject, ITarget> objToITarget = new Dictionary<GameObject, ITarget>();
-
+    private Dictionary<GameObject, Indicator> objToIndicator = new Dictionary<GameObject, Indicator>();
+    public Dictionary<GameObject, GameObject> botGOToIndicatorGO = new Dictionary<GameObject, GameObject>();
 
     public IHit GetIHitFromGameObj(GameObject obj)
     {
@@ -32,6 +33,31 @@ public class Cache : Singleton<Cache>
         }
 
         return objToITarget[obj];
+    }
 
+    public Indicator GetIndicatorFromGameObj(GameObject obj)
+    {
+        if (!objToIndicator.ContainsKey(obj))
+        {
+            Indicator newIndicator = obj.GetComponent<Indicator>();
+            if (newIndicator == null)
+            {
+                Debug.Log("Null Indicator");
+                return null;
+            }
+            else
+                objToIndicator[obj] = newIndicator;
+        }
+        return objToIndicator[obj];
+    }
+
+    public void SetBotGOToIndicatorGO(GameObject botGO, GameObject indicatorGO)
+    {
+        botGOToIndicatorGO[botGO] = indicatorGO;
+    }
+
+    public GameObject GetIndicatorGOFromBotGO(GameObject botGO)
+    {
+        return botGOToIndicatorGO[botGO];
     }
 }

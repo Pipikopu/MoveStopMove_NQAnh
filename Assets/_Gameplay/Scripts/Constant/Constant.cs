@@ -26,7 +26,7 @@ public static class Constant
 
     public const string SELECTED_PANT = "SelectedPant";
     public const string SELECTED_HAT = "SelectedHat";
-    public const string SELECTED_SHIELD = "SelectedShiled";
+    public const string SELECTED_SHIELD = "SelectedShield";
     public const string SELECTED_BODY = "SelectedBody";
     public const string SELECTED_TAIL = "SelectedTail";
     public const string SELECTED_WING = "SelectedWing";

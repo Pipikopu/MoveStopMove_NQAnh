@@ -17,7 +17,8 @@ public class BotController : Singleton<BotController>
     public float xRange;
     public float zRange;
 
-    public Dictionary<CharacterBoundary, Character> boundToChar = new Dictionary<CharacterBoundary, Character>();
+    public Transform indicatorsHolder;
+    public Indicator indicatorPrefab;
 
     private string[] names = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
 
@@ -26,6 +27,7 @@ public class BotController : Singleton<BotController>
         for (int i = 0; i < numOfBots; i++)
         {
             SimplePool.Preload(botPrefab.gameObject, numOfBots, botsHolder);
+            SimplePool.Preload(indicatorPrefab.gameObject, numOfBots, indicatorsHolder);
         }
     }
 
@@ -51,6 +53,8 @@ public class BotController : Singleton<BotController>
     public void ReuseBot(GameObject bot)
     {
         SimplePool.Despawn(bot);
+        SimplePool.Despawn(Cache.Ins.GetIndicatorGOFromBotGO(bot));
+
         int remainNumOfBots = LevelManager.Ins.GetRemainNumOfBots();
         int numActiveBots = SimplePool.GetNumOfActiveObjs(botPrefab.gameObject);
 
@@ -76,11 +80,17 @@ public class BotController : Singleton<BotController>
         Quaternion randomRot = GetRandomRot();
 
         GameObject botGO = SimplePool.Spawn(botPrefab.gameObject, randomPos, randomRot);
-
-        botGO.transform.localScale = Vector3.one;
         Character botChar = botGO.GetComponent<CharacterBoundary>().character;
 
+        GameObject indicatorGO = SimplePool.Spawn(indicatorPrefab.gameObject, randomPos, Quaternion.identity);
+        Indicator indicator = Cache.Ins.GetIndicatorFromGameObj(indicatorGO);
+
+        indicator.SetOriginCharacter(botChar);
+
+        Cache.Ins.SetBotGOToIndicatorGO(botGO, indicatorGO);
+
         float botScale = Random.Range(0.9f, 1.1f);
+        botGO.transform.localScale = Vector3.one;
         botChar.IncreaseScale(player.GetScale() * botScale);
 
         if (botScale < 1)

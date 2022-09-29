@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3807601876683981045
 Transform:
   m_ObjectHideFlags: 0
@@ -846,6 +846,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3807601877254056612}
     m_Modifications:
     - target: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e534eb62a460242b1b4713b4c12ec4b9, type: 2}
@@ -962,9 +966,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39260dc1d5e24be59d594b908154ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 3807601876216330519}
   charBound: {fileID: 3807601877254056610}
   scoreText: {fileID: 3807601877160331112}
-  range: 1
   bot: {fileID: 3807601876216330519}
   botTransform: {fileID: 3807601877254056612}
   botModel: {fileID: 8191455590075409556}
