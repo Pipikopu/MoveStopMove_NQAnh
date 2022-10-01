@@ -11,14 +11,13 @@ public class Character : MonoBehaviour, IHit
     protected float scale = 1;
     protected int score = 0;
     protected float range = 1;
-
     protected int scoreToScale = 2;
 
     protected new string name;
 
     public SkinnedMeshRenderer bodyRend;
 
-    private void Start()
+    private void Awake()
     {
         scale = 1;
         score = 0;

@@ -54,6 +54,11 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
+
+        else if (other.gameObject.CompareTag(Constant.OBSTACLE))
+        {
+            OnExecuteHit(null);
+        }
     }
 
     // Execute a hit

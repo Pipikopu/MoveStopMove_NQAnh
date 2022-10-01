@@ -31,4 +31,6 @@ public static class Constant
     public const string SELECTED_TAIL = "SelectedTail";
     public const string SELECTED_WING = "SelectedWing";
     public const string SELECTED_SET = "SelectedSet";
+
+    public const string OBSTACLE = "Obstacle";
 }
