@@ -16,6 +16,8 @@ public class Character : MonoBehaviour, IHit
 
     protected new string name;
 
+    public SkinnedMeshRenderer bodyRend;
+
     private void Start()
     {
         scale = 1;
@@ -89,6 +91,11 @@ public class Character : MonoBehaviour, IHit
     public string GetName()
     {
         return name;
+    }
+
+    public Material GetBodyMat()
+    {
+        return bodyRend.materials[0];
     }
 
     public virtual void Move() { }

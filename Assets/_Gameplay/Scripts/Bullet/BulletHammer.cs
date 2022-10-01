@@ -13,7 +13,7 @@ public class BulletHammer : Bullet
 
     public override void InitSkin(WeaponSkinID skinID)
     {
-        Material weaponSkin = DataManager.Ins.GetWeaponMaterial(skinID);
+        Material weaponSkin = SkinController.Ins.GetWeaponMaterial(skinID);
         ChangeRendMaterial(weaponSkin);
     }
 

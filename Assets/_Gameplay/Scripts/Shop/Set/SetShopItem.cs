@@ -16,7 +16,7 @@ public class SetShopItem : MonoBehaviour
     public void ChooseSet()
     {
         PlayerPrefs.SetInt(Constant.SELECTED_SET, (int)setSkinID);
-        Set set = DataManager.Ins.GetSet(setSkinID);
+        Set set = SkinController.Ins.GetSet(setSkinID);
 
         PlayerPrefs.SetInt(Constant.SELECTED_PANT, (int)set.pantSkinID);
         PlayerPrefs.SetInt(Constant.SELECTED_HAT, (int)set.hatSkinID);

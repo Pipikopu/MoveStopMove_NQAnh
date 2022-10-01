@@ -8,16 +8,16 @@ public class HatShop : Singleton<HatShop>
 
     public void TryHat(HatSkinID hatSkinID)
     {
-        player.TryHat(hatSkinID);
+        player.GetPlayerSkin().TryHat(hatSkinID);
     }
 
     public void ChooseHat()
     {
-        player.ChangeHat();
+        player.GetPlayerSkin().ChangeHat();
     }
 
     public void ResetHat()
     {
-        player.SetItems();
+        player.GetPlayerSkin().SetItems();
     }
 }

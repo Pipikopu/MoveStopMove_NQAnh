@@ -54,7 +54,7 @@ public class BotStateMachine : Character, ITarget, IHit
     public Transform weaponHolder;
 
     [Header("Skin")]
-    public SkinnedMeshRenderer pantRend;
+    public BotSkin botSkin;
 
     private void OnEnable()
     {
@@ -70,6 +70,7 @@ public class BotStateMachine : Character, ITarget, IHit
         scale = 1;
 
         InitWeapon();
+        botSkin.OnInit();
     }
 
     private void InitWeapon()
@@ -80,7 +81,7 @@ public class BotStateMachine : Character, ITarget, IHit
         }
         weaponID = (WeaponID)Random.Range(0, 3);
         weaponSkinID = (WeaponSkinID)Random.Range(0, 7);
-        weapon = PrefabManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
+        weapon = ItemController.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
     }
 
     private void Update()

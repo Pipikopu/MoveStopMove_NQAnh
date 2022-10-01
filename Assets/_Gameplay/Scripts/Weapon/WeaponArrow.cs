@@ -12,7 +12,7 @@ public class WeaponArrow : Weapon
 
     private void ChangeRendMat(WeaponSkinID skinID)
     {
-        Material weaponSkin = DataManager.Ins.GetWeaponMaterial(skinID);
+        Material weaponSkin = SkinController.Ins.GetWeaponMaterial(skinID);
         var materials = meshRend.sharedMaterials;
         materials[0] = weaponSkin;
         materials[1] = weaponSkin;

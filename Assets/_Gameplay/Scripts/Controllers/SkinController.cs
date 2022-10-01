@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : Singleton<DataManager>
+public class SkinController : Singleton<SkinController>
 {
     public List<Weapon> weaponPrefabs;
 
@@ -66,4 +66,25 @@ public class DataManager : Singleton<DataManager>
     {
         return setsList[(int)setSkinID];
     }
+
+    public Material GetRandomPantMaterial()
+    {
+        PantSkinID pantSkinID = (PantSkinID)Random.Range(0, pantMaterials.Count);
+        return pantMaterials[(int)pantSkinID];
+    }
+
+    public HatSkinID GetRandomHatItem()
+    {
+        HatSkinID hatSkinID = (HatSkinID)Random.Range(0, hatPrefabs.Count);
+        return hatSkinID;
+    }
+
+    public Material GetRandomBodyMaterial()
+    {
+        BodyMaterialID bodyMaterialID = (BodyMaterialID)Random.Range(0, bodyMaterials.Count);
+        return bodyMaterials[(int)bodyMaterialID];
+    }
+
+
+
 }

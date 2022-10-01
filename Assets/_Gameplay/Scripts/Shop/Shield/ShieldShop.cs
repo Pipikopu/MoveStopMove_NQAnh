@@ -8,16 +8,16 @@ public class ShieldShop : Singleton<ShieldShop>
 
     public void TryShield(ShieldSkinID shieldSkinID)
     {
-        player.TryShield(shieldSkinID);
+        player.GetPlayerSkin().TryShield(shieldSkinID);
     }
 
     public void ChooseShield()
     {
-        player.ChangeShield();
+        player.GetPlayerSkin().ChangeShield();
     }
 
     public void ResetShield()
     {
-        player.SetItems();
+        player.GetPlayerSkin().SetItems();
     }
 }

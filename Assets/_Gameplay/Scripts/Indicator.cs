@@ -7,9 +7,13 @@ public class Indicator : MonoBehaviour
 {
     public Transform target;
     public GameObject followImage;
-    public GameObject nameText;
+    public GameObject nameTextObj;
     public Text scoreText;
     public Character originCharacter;
+    public Image scoreHolder;
+    public Text nameText;
+
+    private Material indicatorMat;
 
     private bool nameAvailable;
 
@@ -28,6 +32,18 @@ public class Indicator : MonoBehaviour
     private void SetScore()
     {
         scoreText.text = originCharacter.GetScore().ToString();
+    }
+
+    public void SetMaterial()
+    {
+        indicatorMat = originCharacter.GetBodyMat();
+        nameText.color = indicatorMat.color;
+        scoreHolder.color = indicatorMat.color;
+    }
+
+    public void SetName()
+    {
+        nameText.text = originCharacter.GetName();
     }
 
     private void Update()
@@ -57,13 +73,13 @@ public class Indicator : MonoBehaviour
             nameAvailable = false;
         }
 
-        if (nameText.activeInHierarchy == false && nameAvailable)
+        if (nameTextObj.activeInHierarchy == false && nameAvailable)
         {
-            nameText.SetActive(true);
+            nameTextObj.SetActive(true);
         }
-        else if (nameText.activeInHierarchy == true && !nameAvailable)
+        else if (nameTextObj.activeInHierarchy == true && !nameAvailable)
         {
-            nameText.SetActive(false);
+            nameTextObj.SetActive(false);
         }
 
         followImage.transform.position = new Vector2(screenPos.x, screenPos.y + Screen.height / 8);

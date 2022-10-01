@@ -6,8 +6,6 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    public UIID startCanvasId;
-
     protected void Awake()
     {
         Input.multiTouchEnabled = false;
@@ -22,6 +20,5 @@ public class GameManager : Singleton<GameManager>
         }
 
         LevelManager.Ins.SetGameState(Constant.GameState.PAUSE);
-        UIManager.Ins.OpenUI(startCanvasId);
     }
 }

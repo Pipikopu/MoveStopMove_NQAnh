@@ -8,16 +8,16 @@ public class PantShop : Singleton<PantShop>
 
     public void TryPant(PantSkinID pantSkinID)
     {
-        player.TryPant(pantSkinID);
+        player.GetPlayerSkin().TryPant(pantSkinID);
     }
 
     public void ChoosePant()
     {
-        player.ChangePant();
+        player.GetPlayerSkin().ChangePant();
     }
 
     public void ResetPant()
     {
-        player.SetItems();
+        player.GetPlayerSkin().SetItems();
     }
 }

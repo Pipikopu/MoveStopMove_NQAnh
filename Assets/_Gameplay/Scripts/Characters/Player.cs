@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player : Character, ITarget
 {
+
     // Player Variables
     [Header("Player Setting")]
     public Player player;
+    public static Player _player;
     public Transform playerTransform;
     public Transform playerModel;
     public Rigidbody playerRb;
@@ -43,34 +45,17 @@ public class Player : Character, ITarget
     private bool isDead;
     private bool isWin;
 
-    // Skin Variables
-    [Header("Skin")]
-    public SkinnedMeshRenderer bodyRend;
-    private BodyMaterialID bodyMatID;
-
-    private PantSkinID pantSkinID;
-    public SkinnedMeshRenderer pantRend;
-
-    private HatSkinID hatSkinID;
-    private Item hatItem;
-    public Transform hatHolder;
-
-    private ShieldSkinID shieldSkinID;
-    private Item shieldItem;
-    public Transform shieldHolder;
-
-    public Transform tailHolder;
-    private Item tailItem;
-    private TailSkinID tailSkinID;
-
-    public Transform wingHolder;
-    private Item wingItem;
-    private WingSkinID wingSkinID;
-
     // FollowingUI
     [Header("Following UI")]
     public GameObject underUI;
-    public GameObject indicator;
+
+    public PlayerSkin playerSkin;
+    public Indicator playerIndicator;
+
+    private void Awake()
+    {
+        _player = this;
+    }
 
     private void OnEnable()
     {
@@ -90,7 +75,9 @@ public class Player : Character, ITarget
         isWin = false;
 
         // Init Skin
-        SetItems();
+        InitWeapon();
+        InitName();
+        playerSkin.OnInit();
 
         // Init Animation
         playerAnimator.SetBool(Constant.ANIM_IS_WIN, false);
@@ -142,17 +129,6 @@ public class Player : Character, ITarget
         joystickCanvas.gameObject.SetActive(activate);
     }
 
-    public void SetItems()
-    {
-        InitWing();
-        InitTail();
-        InitBody();
-        InitWeapon();
-        InitPant();
-        InitHat();
-        InitShield();
-    }
-
     private void InitWeapon()
     {
         if (weapon != null)
@@ -168,7 +144,20 @@ public class Player : Character, ITarget
         else
             weaponSkinID = (WeaponSkinID)0;
 
-        weapon = PrefabManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
+        weapon = ItemController.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
+    }
+
+    public void InitName()
+    {
+        if (PlayerPrefs.HasKey("PlayerName"))
+        {
+            SetName(PlayerPrefs.GetString("PlayerName"));
+        }
+        else
+        {
+            PlayerPrefs.SetString("PlayerName", "Player");
+        }
+        playerIndicator.SetName();
     }
 
     #region Move
@@ -305,88 +294,6 @@ public class Player : Character, ITarget
     }
     #endregion
 
-    #region Initialize Skin
-    private void InitPant()
-    {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_PANT))
-            pantSkinID = (PantSkinID)PlayerPrefs.GetInt(Constant.SELECTED_PANT);
-        else
-            pantSkinID = (PantSkinID)0;
-
-        Material pantMat = DataManager.Ins.GetPantMaterial(pantSkinID);
-        var materials = pantRend.sharedMaterials;
-        materials[0] = pantMat;
-        pantRend.sharedMaterials = materials;
-    }
-
-    private void InitHat()
-    {
-        if (hatItem != null)
-            Destroy(hatItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_HAT))
-            hatSkinID = (HatSkinID)PlayerPrefs.GetInt(Constant.SELECTED_HAT);
-        else
-            hatSkinID = (HatSkinID)0;
-
-        hatItem = PrefabManager.Ins.SetHat(hatSkinID, hatHolder);
-    }
-
-    private void InitShield()
-    {
-        if (shieldItem != null)
-            Destroy(shieldItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_SHIELD))
-            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt(Constant.SELECTED_SHIELD);
-        else
-            shieldSkinID = (ShieldSkinID)0;
-
-        shieldItem = PrefabManager.Ins.SetShield(shieldSkinID, shieldHolder);
-    }
-
-    private void InitBody()
-    {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_BODY))
-            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt(Constant.SELECTED_BODY);
-        else
-            bodyMatID = (BodyMaterialID)0;
-
-        Material bodyMat = DataManager.Ins.GetBodyMaterial(bodyMatID);
-        var materials = bodyRend.sharedMaterials;
-        materials[0] = bodyMat;
-        bodyRend.sharedMaterials = materials;
-    }
-
-    private void InitTail()
-    {
-        if (tailItem != null)
-            Destroy(tailItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_TAIL))
-            tailSkinID = (TailSkinID)PlayerPrefs.GetInt(Constant.SELECTED_TAIL);
-        else
-            tailSkinID = (TailSkinID)0;
-
-        tailItem = PrefabManager.Ins.SetTail(tailSkinID, tailHolder);
-    }
-
-    private void InitWing()
-    {
-        if (wingItem != null)
-            Destroy(wingItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WING))
-            wingSkinID = (WingSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WING);
-        else
-            wingSkinID = (WingSkinID)0;
-
-        wingItem = PrefabManager.Ins.SetWing(wingSkinID, wingHolder);
-    }
-    #endregion
-
-
-    #region Change Skin
     public void ChangeWeapon()
     {
         if (weapon != null)
@@ -402,135 +309,13 @@ public class Player : Character, ITarget
         else
             weaponSkinID = (WeaponSkinID)0;
 
-        weapon = PrefabManager.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
+        weapon = ItemController.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
     }
 
-    public void ChangePant()
+    public PlayerSkin GetPlayerSkin()
     {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_PANT))
-            pantSkinID = (PantSkinID)PlayerPrefs.GetInt(Constant.SELECTED_PANT);
-        else
-            pantSkinID = (PantSkinID)0;
-
-        Material pantMat = DataManager.Ins.GetPantMaterial(pantSkinID);
-        var materials = pantRend.sharedMaterials;
-        materials[0] = pantMat;
-        pantRend.sharedMaterials = materials;
+        return playerSkin;
     }
-
-    public void TryPant(PantSkinID pantSkinID)
-    {
-        Material pantMat = DataManager.Ins.GetPantMaterial(pantSkinID);
-        var materials = pantRend.sharedMaterials;
-        materials[0] = pantMat;
-        pantRend.sharedMaterials = materials;
-    }
-
-    public void ChangeHat()
-    {
-        if (hatItem != null)
-            Destroy(hatItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_HAT))
-            hatSkinID = (HatSkinID)PlayerPrefs.GetInt(Constant.SELECTED_HAT);
-        else
-            hatSkinID = (HatSkinID)0;
-
-        hatItem = PrefabManager.Ins.SetHat(hatSkinID, hatHolder);
-    }
-
-    public void TryHat(HatSkinID hatSkinID)
-    {
-        if (hatItem != null)
-            Destroy(hatItem.gameObject);
-
-        hatItem = PrefabManager.Ins.SetHat(hatSkinID, hatHolder);
-    }
-
-    public void ChangeShield()
-    {
-        if (shieldItem != null)
-            Destroy(shieldItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_SHIELD))
-            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt(Constant.SELECTED_SHIELD);
-        else
-            shieldSkinID = (ShieldSkinID)0;
-
-        shieldItem = PrefabManager.Ins.SetShield(shieldSkinID, shieldHolder);
-    }
-
-    public void TryShield(ShieldSkinID shieldSkinID)
-    {
-        if (shieldItem != null)
-            Destroy(shieldItem.gameObject);
-
-        shieldItem = PrefabManager.Ins.SetShield(shieldSkinID, shieldHolder);
-    }
-
-    public void ChangeBody()
-    {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_BODY))
-            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt(Constant.SELECTED_BODY);
-        else
-            bodyMatID = (BodyMaterialID)0;
-
-        Material bodyMat = DataManager.Ins.GetBodyMaterial(bodyMatID);
-        var materials = bodyRend.sharedMaterials;
-        materials[0] = bodyMat;
-        bodyRend.sharedMaterials = materials;
-    }
-
-    public void TryBody(BodyMaterialID bodyMatId)
-    {
-        Material bodyMat = DataManager.Ins.GetBodyMaterial(bodyMatId);
-        var materials = bodyRend.sharedMaterials;
-        materials[0] = bodyMat;
-        bodyRend.sharedMaterials = materials;
-    }
-
-    public void ChangeTail()
-    {
-        if (tailItem != null)
-            Destroy(tailItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_TAIL))
-            tailSkinID = (TailSkinID)PlayerPrefs.GetInt(Constant.SELECTED_TAIL);
-        else
-            tailSkinID = (TailSkinID)0;
-
-        tailItem = PrefabManager.Ins.SetTail(tailSkinID, tailHolder);
-    }
-
-    public void TryTail(TailSkinID tailSkinID)
-    {
-        if (tailItem != null)
-            Destroy(tailItem.gameObject);
-
-        tailItem = PrefabManager.Ins.SetTail(tailSkinID, tailHolder);
-    }
-
-    public void ChangeWing()
-    {
-        if (wingItem != null)
-            Destroy(wingItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WING))
-            wingSkinID = (WingSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WING);
-        else
-            wingSkinID = (WingSkinID)0;
-
-        wingItem = PrefabManager.Ins.SetWing(wingSkinID, wingHolder);
-    }
-
-    public void TryWing(WingSkinID wingSkinID)
-    {
-        if (wingItem != null)
-            Destroy(wingItem.gameObject);
-
-        wingItem = PrefabManager.Ins.SetWing(wingSkinID, wingHolder);
-    }
-    #endregion
 
     public override void IncreaseRange(float increaseValue)
     {

@@ -8,7 +8,7 @@ public class BulletCandy : Bullet
 
     public override void InitSkin(WeaponSkinID skinID)
     {
-        Material weaponSkin = DataManager.Ins.GetWeaponMaterial(skinID);
+        Material weaponSkin = SkinController.Ins.GetWeaponMaterial(skinID);
         ChangeRendMat(weaponSkin);
     }
 

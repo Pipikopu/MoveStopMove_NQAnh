@@ -8,25 +8,25 @@ public class SetShop : Singleton<SetShop>
 
     public void TrySet(SetSkinID setSkinID)
     {
-        Set set = DataManager.Ins.GetSet(setSkinID);
-        player.TryPant(set.pantSkinID);
-        player.TryBody(set.bodyMatID);
-        player.TryHat(set.hatSkinID);
-        player.TryTail(set.tailSkinID);
-        player.TryWing(set.wingSkinID);
+        Set set = SkinController.Ins.GetSet(setSkinID);
+        player.GetPlayerSkin().TryPant(set.pantSkinID);
+        player.GetPlayerSkin().TryBody(set.bodyMatID);
+        player.GetPlayerSkin().TryHat(set.hatSkinID);
+        player.GetPlayerSkin().TryTail(set.tailSkinID);
+        player.GetPlayerSkin().TryWing(set.wingSkinID);
     }
 
     public void ChooseSet()
     {
-        player.ChangePant();
-        player.ChangeBody();
-        player.ChangeHat();
-        player.ChangeTail();
-        player.ChangeWing();
+        player.GetPlayerSkin().ChangePant();
+        player.GetPlayerSkin().ChangeBody();
+        player.GetPlayerSkin().ChangeHat();
+        player.GetPlayerSkin().ChangeTail();
+        player.GetPlayerSkin().ChangeWing();
     }
 
     public void ResetSet()
     {
-        player.SetItems();
+        player.GetPlayerSkin().SetItems();
     }
 }

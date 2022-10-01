@@ -17,6 +17,7 @@ public enum UIID
 
 public class UIManager : Singleton<UIManager>
 {
+    public UIID startCanvasId;
     public List<UIID> startUIID;
     public List<UICanvas> startUICanvas;
     
@@ -26,6 +27,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Awake()
     {
+
     }
 
     private void Start()
@@ -34,6 +36,8 @@ public class UIManager : Singleton<UIManager>
         {
             UICanvas[startUIID[i]] = startUICanvas[i];
         }
+
+        OpenUI(startCanvasId);
     }
 
     #region Canvas

@@ -12,7 +12,7 @@ public class BulletArrow : Bullet
     {
         for (int i = 0; i < meshRends.Count; i++)
         {
-            Material weaponSkin = DataManager.Ins.GetWeaponMaterial(skinID);
+            Material weaponSkin = SkinController.Ins.GetWeaponMaterial(skinID);
             ChangeRendMaterial(weaponSkin, i);
         }
     }

@@ -79,11 +79,11 @@ public enum SetSkinID
     evil_set = 1,
 }
 
-public class PrefabManager : Singleton<PrefabManager>
+public class ItemController : Singleton<ItemController>
 {
     public Weapon SetWeapon(WeaponID ID, WeaponSkinID SkinID, Transform weaponHolder)
     {
-        Weapon weapon = Instantiate(DataManager.Ins.GetWeapon(ID), weaponHolder);
+        Weapon weapon = Instantiate(SkinController.Ins.GetWeapon(ID), weaponHolder);
         weapon.InitSkin(SkinID);
 
         return weapon;
@@ -91,9 +91,9 @@ public class PrefabManager : Singleton<PrefabManager>
 
     public Item SetHat(HatSkinID ID, Transform hatHolder)
     {
-        if (DataManager.Ins.GetHatItem(ID) != null)
+        if (SkinController.Ins.GetHatItem(ID) != null)
         {
-            Item hat = Instantiate(DataManager.Ins.GetHatItem(ID), hatHolder);
+                Item hat = Instantiate(SkinController.Ins.GetHatItem(ID), hatHolder);
             return hat;
         }
         return null;
@@ -101,9 +101,9 @@ public class PrefabManager : Singleton<PrefabManager>
 
     public Item SetShield(ShieldSkinID ID, Transform shieldHolder)
     {
-        if (DataManager.Ins.GetShieldItem(ID) != null)
+        if (SkinController.Ins.GetShieldItem(ID) != null)
         {
-            Item shield = Instantiate(DataManager.Ins.GetShieldItem(ID), shieldHolder);
+            Item shield = Instantiate(SkinController.Ins.GetShieldItem(ID), shieldHolder);
             return shield;
         }
 
@@ -112,9 +112,9 @@ public class PrefabManager : Singleton<PrefabManager>
 
     public Item SetTail(TailSkinID ID, Transform tailHolder)
     {
-        if (DataManager.Ins.GetTailItem(ID) != null)
+        if (SkinController.Ins.GetTailItem(ID) != null)
         {
-            Item tail = Instantiate(DataManager.Ins.GetTailItem(ID), tailHolder);
+            Item tail = Instantiate(SkinController.Ins.GetTailItem(ID), tailHolder);
             return tail;
         }
         return null;
@@ -122,9 +122,9 @@ public class PrefabManager : Singleton<PrefabManager>
 
     public Item SetWing(WingSkinID ID, Transform wingHolder)
     {
-        if (DataManager.Ins.GetWingItem(ID) != null)
+        if (SkinController.Ins.GetWingItem(ID) != null)
         {
-            Item wing = Instantiate(DataManager.Ins.GetWingItem(ID), wingHolder);
+            Item wing = Instantiate(SkinController.Ins.GetWingItem(ID), wingHolder);
             return wing;
         }
         return null;

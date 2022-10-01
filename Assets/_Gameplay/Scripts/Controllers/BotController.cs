@@ -20,7 +20,29 @@ public class BotController : Singleton<BotController>
     public Transform indicatorsHolder;
     public Indicator indicatorPrefab;
 
-    private string[] names = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
+    private string[] names = {
+        "Nanda3",
+        "Kumar1407",
+        "MeBuffalo",
+        "###Hello###",
+        "GoodToKnow",
+        "ItsMe999",
+        "JustPlay",
+        "Slayder",
+        "beBee",
+        "okIm5",
+        "jetLaggg",
+        "3toCount",
+        "normalPlayer",
+        "imABot",
+        "lovePizza",
+        "humanOidx",
+        "randomName",
+        "justGuess",
+        "newName"
+    };
+
+    private List<string> namesToUse = new List<string>();
 
     private void Awake()
     {
@@ -33,6 +55,11 @@ public class BotController : Singleton<BotController>
 
     private void Start()
     {
+        for (int i = 0; i < names.Length; i++)
+        {
+            namesToUse.Add(names[i]);
+        }
+
         SpawnAllBots();
     }
 
@@ -82,10 +109,16 @@ public class BotController : Singleton<BotController>
         GameObject botGO = SimplePool.Spawn(botPrefab.gameObject, randomPos, randomRot);
         Character botChar = botGO.GetComponent<CharacterBoundary>().character;
 
+        string botName = namesToUse[Random.Range(0, namesToUse.Count)];
+        botChar.SetName(botName);
+        namesToUse.Remove(botName);
+
         GameObject indicatorGO = SimplePool.Spawn(indicatorPrefab.gameObject, randomPos, Quaternion.identity);
         Indicator indicator = Cache.Ins.GetIndicatorFromGameObj(indicatorGO);
 
         indicator.SetOriginCharacter(botChar);
+        indicator.SetMaterial();
+        indicator.SetName();
 
         Cache.Ins.SetBotGOToIndicatorGO(botGO, indicatorGO);
 
@@ -108,7 +141,6 @@ public class BotController : Singleton<BotController>
         {
             botChar.SetScore(player.GetScore() + Random.Range(1, 2));
         }
-        botChar.SetName(names[Random.Range(0, names.Length - 1)]);
     }
 
     private Vector3 GetRandomPos()
