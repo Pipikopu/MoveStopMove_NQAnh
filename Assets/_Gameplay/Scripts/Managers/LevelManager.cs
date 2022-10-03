@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    public int numOfBots;
+    public Transform planeHolder;
+    public List<LevelData> levelDatas;
+    private GameObject gamePlane;
+
+    private int numOfBots;
     private int numOfTotalBots;
     private int numOfBotsDie = 0;
+
+    private int level;
 
     private Character finalKiller;
 
@@ -17,7 +24,18 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        numOfTotalBots = numOfBots;
+        level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        if (level >= levelDatas.Count)
+        {
+            level = 0;
+            PlayerPrefs.SetInt("CurrentLevel", 0);
+        }
+        gamePlane = Instantiate(levelDatas[level].gamePlane, planeHolder);
+
+        numOfTotalBots = levelDatas[level].numOfBots;
+
+        numOfBots = numOfTotalBots;
+        numOfBotsDie = 0;
     }
 
     public void DecreaseNumOfBots(int decreaseNum)
@@ -62,12 +80,10 @@ public class LevelManager : Singleton<LevelManager>
         return finalKiller;
     }
 
-    public void RestartGame()
+    public void StartGame(int level)
     {
-        numOfBots = numOfTotalBots;
-        BotController.Ins.SpawnAllBots();
-        player.gameObject.SetActive(false);
-        player.gameObject.SetActive(true);
-        CinemachineManager.Ins.SwitchToStartGameCam();
+        PlayerPrefs.SetInt("CurrentLevel", level);
+        SimplePool.ReleaseAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

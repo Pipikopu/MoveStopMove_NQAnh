@@ -16,7 +16,7 @@ public class CharacterBoundary : MonoBehaviour
         OnInit();
     }
 
-    private void OnInit()
+    public void OnInit()
     {
         targetCharacters = new List<GameObject>();
         charBaseRange = 6.5f;

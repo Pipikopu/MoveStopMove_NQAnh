@@ -19,7 +19,6 @@ public class UICFail : UICanvas
     {
         UIManager.Ins.OpenUI(UIID.UICMainMenu);
         Close();
-        LevelManager.Ins.RestartGame();
+        LevelManager.Ins.StartGame(PlayerPrefs.GetInt("CurrentLevel"));
     }
-
 }

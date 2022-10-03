@@ -64,10 +64,13 @@ public class Bullet : MonoBehaviour
     // Execute a hit
     private void OnExecuteHit(IHit newIHit)
     {
-        originWeapon.SetActive(true);
-        originCharacter.IncreaseScore(Random.Range(1, 3));
-        newIHit.GetHit(originCharacter);
-        SimplePool.Despawn(this.gameObject);
+        if (newIHit != null)
+        {
+            originWeapon.SetActive(true);
+            originCharacter.IncreaseScore(Random.Range(1, 3));
+            newIHit.GetHit(originCharacter);
+            SimplePool.Despawn(bulletTransform.gameObject);
+        }
     }
 
 

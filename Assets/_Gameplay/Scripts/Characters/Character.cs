@@ -30,7 +30,7 @@ public class Character : MonoBehaviour, IHit
         OnInit();
     }
 
-    private void OnInit()
+    public virtual void OnInit()
     {
         scale = 1;
         charBound.transform.localScale = Vector3.one;

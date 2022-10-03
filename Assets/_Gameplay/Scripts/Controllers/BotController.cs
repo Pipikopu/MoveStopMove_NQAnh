@@ -8,7 +8,7 @@ public class BotController : Singleton<BotController>
     public Player player;
 
     [Header("BotSpawner")]
-    public int numOfBots;
+    public int numOfBotsOnGround;
     public Transform botsHolder;
     public CharacterBoundary botPrefab;
 
@@ -46,10 +46,10 @@ public class BotController : Singleton<BotController>
 
     private void Awake()
     {
-        for (int i = 0; i < numOfBots; i++)
+        for (int i = 0; i < numOfBotsOnGround; i++)
         {
-            SimplePool.Preload(botPrefab.gameObject, numOfBots, botsHolder);
-            SimplePool.Preload(indicatorPrefab.gameObject, numOfBots, indicatorsHolder);
+            SimplePool.Preload(botPrefab.gameObject, numOfBotsOnGround, botsHolder);
+            SimplePool.Preload(indicatorPrefab.gameObject, numOfBotsOnGround, indicatorsHolder);
         }
     }
 
@@ -63,10 +63,21 @@ public class BotController : Singleton<BotController>
         SpawnAllBots();
     }
 
+    public void PreloadBots()
+    {
+        SimplePool.ReleaseAll();
+        for (int i = 0; i < numOfBotsOnGround; i++)
+        {
+            SimplePool.Preload(botPrefab.gameObject, numOfBotsOnGround, botsHolder);
+            SimplePool.Preload(indicatorPrefab.gameObject, numOfBotsOnGround, indicatorsHolder);
+        }
+    }
+
     public void SpawnAllBots()
     {
         SimplePool.CollectAll();
-        for (int i = 0; i < numOfBots; i++)
+        
+        for (int i = 0; i < numOfBotsOnGround; i++)
         {
             SpawnBot();
         }
@@ -85,7 +96,7 @@ public class BotController : Singleton<BotController>
         int remainNumOfBots = LevelManager.Ins.GetRemainNumOfBots();
         int numActiveBots = SimplePool.GetNumOfActiveObjs(botPrefab.gameObject);
 
-        if (remainNumOfBots >= numOfBots)
+        if (remainNumOfBots >= numOfBotsOnGround)
         {
             SpawnBot();
         }
@@ -114,6 +125,7 @@ public class BotController : Singleton<BotController>
         namesToUse.Remove(botName);
 
         GameObject indicatorGO = SimplePool.Spawn(indicatorPrefab.gameObject, randomPos, Quaternion.identity);
+        indicatorGO.transform.SetParent(indicatorsHolder);
         Indicator indicator = Cache.Ins.GetIndicatorFromGameObj(indicatorGO);
 
         indicator.SetOriginCharacter(botChar);

@@ -62,7 +62,7 @@ public class Player : Character, ITarget
         OnInit();
     }
 
-    public void OnInit()
+    public override void OnInit()
     {
         // Init joystick movement
         inputX = 0;
@@ -89,6 +89,11 @@ public class Player : Character, ITarget
         movement = Vector3.zero;
         player.transform.rotation = Quaternion.Euler(0, 60, 0);
         charBound.transform.position = Vector3.zero;
+
+        scale = 1;
+        score = 0;
+        range = 1;
+        scoreToScale = 2;
     }
 
     private void Update()

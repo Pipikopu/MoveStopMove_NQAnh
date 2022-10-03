@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class BotMoveState : BotBaseState
 {
-    private Vector3 targetPosition;
-
     public override void EnterState(BotStateMachine bot)
     {
         bot.agent.speed = bot.speedAgent;
@@ -18,7 +16,9 @@ public class BotMoveState : BotBaseState
     {
         if (bot.agent != null && (bot.agent.remainingDistance <= bot.agent.stoppingDistance || bot.agent.speed < 1))
         {
+            bot.agent.speed = 0;
             bot.SwitchState(bot.IdleState);
+            return;
         }
         else
         {

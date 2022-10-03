@@ -23,6 +23,7 @@ public class BotDeathState : BotBaseState
         {
             BotController.Ins.ReuseBot(bot.botTransform.gameObject);
             bot.SwitchState(bot.AfterDeathState);
+            return;
         }
     }
 

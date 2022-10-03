@@ -37,7 +37,7 @@ public class Cache : Singleton<Cache>
 
     public Indicator GetIndicatorFromGameObj(GameObject obj)
     {
-        if (!objToIndicator.ContainsKey(obj))
+        if (!objToIndicator.ContainsKey(obj) || objToIndicator[obj] == null)
         {
             Indicator newIndicator = obj.GetComponent<Indicator>();
             if (newIndicator == null)
