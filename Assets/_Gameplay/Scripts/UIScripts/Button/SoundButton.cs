@@ -13,11 +13,13 @@ public class SoundButton : MonoBehaviour
         {
             soundButtonOn.SetActive(true);
             soundButtonOff.SetActive(false);
+            SoundManager.Ins.TurnOnSound();
         }
         else
         {
             soundButtonOn.SetActive(false);
             soundButtonOff.SetActive(true);
+            SoundManager.Ins.TurnOffSound();
         }
     }
 
@@ -29,12 +31,14 @@ public class SoundButton : MonoBehaviour
             PlayerPrefs.SetInt("SoundOn", 1);
             soundButtonOn.SetActive(true);
             soundButtonOff.SetActive(false);
+            SoundManager.Ins.TurnOnSound();
         }
         else if (soundValue == 1)
         {
             PlayerPrefs.SetInt("SoundOn", 0);
             soundButtonOn.SetActive(false);
             soundButtonOff.SetActive(true);
+            SoundManager.Ins.TurnOffSound();
         }
     }
 }

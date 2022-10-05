@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : Character, ITarget
 {
-
     // Player Variables
     [Header("Player Setting")]
     public Player player;
@@ -154,14 +153,8 @@ public class Player : Character, ITarget
 
     public void InitName()
     {
-        if (PlayerPrefs.HasKey("PlayerName"))
-        {
-            SetName(PlayerPrefs.GetString("PlayerName"));
-        }
-        else
-        {
-            PlayerPrefs.SetString("PlayerName", "Player");
-        }
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        SetName(data.name);
         playerIndicator.SetName();
     }
 
@@ -225,6 +218,8 @@ public class Player : Character, ITarget
 
                 StartCoroutine(ThrowWeapon());
                 Invoke(nameof(StopAttack), 1f);
+
+                SoundManager.Ins.PlayThrowSound();
             }
         }
     }
@@ -269,6 +264,16 @@ public class Player : Character, ITarget
             LevelManager.Ins.Lose(killer);
             UIManager.Ins.GetUI(UIID.UICGameplay).Close();
             UIManager.Ins.OpenUI(UIID.UICFail);
+            SoundManager.Ins.PlayLoseSound();
+        }
+
+        // Set Progress
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        float newProgress = (float)LevelManager.Ins.GetNumOfBotsDie() / (float)LevelManager.Ins.GetNumOfTotalBots();
+        if (data.progress < newProgress)
+        {
+            data.progress = newProgress;
+            PlayerDataController.Ins.SaveToJson(data);
         }
     }
 
@@ -295,6 +300,11 @@ public class Player : Character, ITarget
             LevelManager.Ins.Win();
             UIManager.Ins.GetUI(UIID.UICGameplay).Close();
             UIManager.Ins.OpenUI(UIID.UICVictory);
+            PlayerData data = PlayerDataController.Ins.LoadFromJson();
+            data.progress = 0;
+            data.level += 1;
+            PlayerDataController.Ins.SaveToJson(data);
+            SoundManager.Ins.PlayVictorySound();
         }
     }
     #endregion
@@ -340,5 +350,17 @@ public class Player : Character, ITarget
         {
             playerAnimator.SetBool(Constant.ANIM_IS_DANCE, false);
         }
+    }
+
+    public override void IncreaseScore(int increaseValue)
+    {
+        base.IncreaseScore(increaseValue);
+        CoinController.Ins.IncreaseCoins(increaseValue);
+    }
+
+    public override void IncreaseScale(float scaleRatio)
+    {
+        base.IncreaseScale(scaleRatio);
+        SoundManager.Ins.PlaySizeUpSound();
     }
 }

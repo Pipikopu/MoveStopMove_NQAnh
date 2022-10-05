@@ -24,12 +24,20 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        level = PlayerPrefs.GetInt("CurrentLevel", 0);
-        if (level >= levelDatas.Count)
+        //level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        //if (level >= levelDatas.Count)
+        //{
+        //    level = 0;
+        //    PlayerPrefs.SetInt("CurrentLevel", 0);
+        //}
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        if (data.level >= levelDatas.Count)
         {
-            level = 0;
-            PlayerPrefs.SetInt("CurrentLevel", 0);
+            data.level = 0;
+            PlayerDataController.Ins.SaveToJson(data);
         }
+        level = data.level;
+
         gamePlane = Instantiate(levelDatas[level].gamePlane, planeHolder);
 
         numOfTotalBots = levelDatas[level].numOfBots;
@@ -82,8 +90,17 @@ public class LevelManager : Singleton<LevelManager>
 
     public void StartGame(int level)
     {
-        PlayerPrefs.SetInt("CurrentLevel", level);
+        //PlayerPrefs.SetInt("CurrentLevel", level);
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        data.level = level;
+        PlayerDataController.Ins.SaveToJson(data);
+
         SimplePool.ReleaseAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public int GetNumOfTotalBots()
+    {
+        return numOfTotalBots;
     }
 }

@@ -36,7 +36,7 @@ public class Character : MonoBehaviour, IHit
         charBound.transform.localScale = Vector3.one;
     }
 
-    public void IncreaseScale(float scaleRatio)
+    public virtual void IncreaseScale(float scaleRatio)
     {
         scale *= scaleRatio;
         if (scale >= 2)
@@ -46,7 +46,7 @@ public class Character : MonoBehaviour, IHit
         charBound.transform.localScale = Vector3.one * scale;
     }
 
-    public void IncreaseScore(int increaseValue)
+    public virtual void IncreaseScore(int increaseValue)
     {
         score += increaseValue;
 
@@ -106,5 +106,6 @@ public class Character : MonoBehaviour, IHit
     public virtual void GetHit(Character killer)
     {
         Death(killer);
+        SoundManager.Ins.PlayDieSound();
     }
 }

@@ -126,6 +126,7 @@ public class BotController : Singleton<BotController>
 
         GameObject indicatorGO = SimplePool.Spawn(indicatorPrefab.gameObject, randomPos, Quaternion.identity);
         indicatorGO.transform.SetParent(indicatorsHolder);
+        indicatorGO.transform.localScale = Vector3.one;
         Indicator indicator = Cache.Ins.GetIndicatorFromGameObj(indicatorGO);
 
         indicator.SetOriginCharacter(botChar);

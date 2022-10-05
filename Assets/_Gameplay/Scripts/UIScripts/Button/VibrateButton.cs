@@ -13,11 +13,13 @@ public class VibrateButton : MonoBehaviour
         {
             vibrateButtonOn.SetActive(true);
             vibrateButtonOff.SetActive(false);
+            SoundManager.Ins.TurnVibrateOn();
         }
         else
         {
             vibrateButtonOn.SetActive(false);
             vibrateButtonOff.SetActive(true);
+            SoundManager.Ins.TurnVibrateOff();
         }
     }
 
@@ -29,12 +31,14 @@ public class VibrateButton : MonoBehaviour
             PlayerPrefs.SetInt("VibrateOn", 1);
             vibrateButtonOn.SetActive(true);
             vibrateButtonOff.SetActive(false);
+            SoundManager.Ins.TurnVibrateOn();
         }
         else if (soundValue == 1)
         {
             PlayerPrefs.SetInt("VibrateOn", 0);
             vibrateButtonOn.SetActive(false);
             vibrateButtonOff.SetActive(true);
+            SoundManager.Ins.TurnVibrateOff();
         }
     }
 }

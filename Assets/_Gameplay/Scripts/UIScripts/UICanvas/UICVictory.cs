@@ -8,6 +8,6 @@ public class UICVictory : UICanvas
     {
         UIManager.Ins.OpenUI(UIID.UICMainMenu);
         Close();
-        LevelManager.Ins.StartGame(PlayerPrefs.GetInt("CurrentLevel") + 1);
+        LevelManager.Ins.StartGame(PlayerDataController.Ins.LoadFromJson().level);
     }
 }
