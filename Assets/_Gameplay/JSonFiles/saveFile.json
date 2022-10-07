@@ -1,16 +1,1 @@
-{
-    "name": "PlayerName",
-    "level": 0,
-    "coins": 5000,
-    "bodyID": 0,
-    "setID": 0,
-    "pantID": 0,
-    "hatID": 0,
-    "weaponID": 0,
-    "weaponSkinID": 0,
-    "shieldID": 0,
-    "wingID": 0,
-    "tailID": 0,
-    "expLevel": 0,
-    "progress": 0
-}
+{"name":"Hiii","level":0,"coins":5130,"bodyID":0,"setID":0,"pantID":0,"hatID":0,"weaponID":0,"weaponSkinID":0,"shieldID":0,"wingID":0,"tailID":0,"expLevel":0,"progress":0.75,"bestRank":3}

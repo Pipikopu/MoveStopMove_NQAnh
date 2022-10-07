@@ -266,14 +266,21 @@ public class Player : Character, ITarget
             SoundManager.Ins.PlayLoseSound();
         }
 
-        // Set Progress
+        // Set Progress + Rank
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         float newProgress = (float)LevelManager.Ins.GetNumOfBotsDie() / (float)LevelManager.Ins.GetNumOfTotalBots();
         if (data.progress < newProgress)
         {
             data.progress = newProgress;
-            PlayerDataController.Ins.SaveToJson(data);
         }
+
+        int newRank = LevelManager.Ins.GetRemainNumOfBots() + 1;
+        if (newRank < data.bestRank)
+        {
+            data.bestRank = newRank;
+        }
+
+        PlayerDataController.Ins.SaveToJson(data);
     }
 
     public bool CanBeTargeted()
@@ -302,6 +309,7 @@ public class Player : Character, ITarget
             PlayerData data = PlayerDataController.Ins.LoadFromJson();
             data.progress = 0;
             data.level += 1;
+            data.bestRank = LevelManager.Ins.GetLevelData(data.level).numOfBots + 1;
             PlayerDataController.Ins.SaveToJson(data);
             SoundManager.Ins.PlayVictorySound();
         }

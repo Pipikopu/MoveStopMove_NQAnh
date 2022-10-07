@@ -20,4 +20,5 @@ public class PlayerData
     public int tailID;
     public int expLevel;
     public float progress;
+    public int bestRank;
 }

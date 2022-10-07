@@ -10,7 +10,6 @@ public class BotMoveState : BotBaseState
     public override void EnterState(BotStateMachine bot)
     {
         timeCounter = 0;
-
         bot.agent.speed = bot.speedAgent;
         bot.agent.SetDestination(RandomNavMeshLocation(bot));
         bot.botAnimator.SetBool(Constant.ANIM_IS_IDLE, false);
@@ -22,9 +21,7 @@ public class BotMoveState : BotBaseState
         if (timeCounter > bot.timeMove)
         {
             timeCounter = 0;
-            bot.SwitchState(bot.IdleState);
-            bot.agent.speed = 0;
-            return;
+            bot.agent.SetDestination(RandomNavMeshLocation(bot));
         }
 
         if (bot.agent != null && (bot.agent.remainingDistance <= bot.agent.stoppingDistance || bot.agent.speed < 1))

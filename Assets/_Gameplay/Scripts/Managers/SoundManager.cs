@@ -63,4 +63,14 @@ public class SoundManager : Singleton<SoundManager>
         if (soundOn) audioSource.PlayOneShot(sizeUpSound);
         if (vibrateOn) Handheld.Vibrate();
     }
+
+    public bool IsSoundOn()
+    {
+        return soundOn;
+    }
+
+    public bool IsVibrateOn()
+    {
+        return vibrateOn;
+    }
 }

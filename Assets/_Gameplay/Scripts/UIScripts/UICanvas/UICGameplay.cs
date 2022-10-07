@@ -12,4 +12,11 @@ public class UICGameplay : UICanvas
     {
         aliveText.text = "Alive: " + LevelManager.Ins.GetRemainNumOfBots().ToString();
     }
+
+    public void OnOpenSetting()
+    {
+        Time.timeScale = 0;
+        UIManager.Ins.OpenUI(UIID.UICSetting);
+        Close();
+    }
 }

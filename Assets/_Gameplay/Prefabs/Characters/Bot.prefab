@@ -816,9 +816,9 @@ MonoBehaviour:
   rotateSpeed: 540
   botAnimator: {fileID: 2245016603555105262}
   timeIdle: 0.5
-  timeMove: 3
   timeAttack: 1.5
   timeDeath: 1.5
+  timeMove: 5
   weaponHolder: {fileID: 3807601877051806999}
   botSkin: {fileID: 5848907231090318586}
 --- !u!114 &5848907231090318586

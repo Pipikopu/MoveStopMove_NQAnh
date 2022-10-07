@@ -93,8 +93,23 @@ public class LevelManager : Singleton<LevelManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void RestartGame()
+    {
+        SimplePool.ReleaseAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public int GetNumOfTotalBots()
     {
         return numOfTotalBots;
+    }
+
+    public LevelData GetLevelData(int level)
+    {
+        if (level >= levelDatas.Count)
+        {
+            level = 0;
+        }
+        return levelDatas[level];
     }
 }

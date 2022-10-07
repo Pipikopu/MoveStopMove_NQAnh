@@ -13,7 +13,8 @@ public enum UIID
     UICFail = 3,
     UICWeaponShop = 4,
     UICSkinShop = 5,
-    UICCoin = 6
+    UICCoin = 6,
+    UICSetting = 7
 }
 
 public class UIManager : Singleton<UIManager>

@@ -11,15 +11,20 @@ public class UICMainMenu : UICanvas
     public Image progressFill;
     public List<Sprite> levelSprites;
     public Image levelIcon;
+    public Text zoneText;
+    public Text bestRank;
 
     private void OnEnable()
     {
         placeHolderText.text = PlayerDataController.Ins.LoadFromJson().name;
         playerText.text = PlayerDataController.Ins.LoadFromJson().name;
         progressFill.rectTransform.localScale = new Vector3(PlayerDataController.Ins.LoadFromJson().progress, 1, 1);
-        int level = PlayerDataController.Ins.LoadFromJson().level;
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        int level = data.level;
         if (level >= levelSprites.Count) level = 0;
         levelIcon.sprite = levelSprites[level];
+        zoneText.text = "Zone: " + (level + 1).ToString();
+        bestRank.text = "Best: $" + data.bestRank.ToString();
     }
 
     public void PlayGame()
@@ -27,6 +32,7 @@ public class UICMainMenu : UICanvas
         UIManager.Ins.OpenUI(UIID.UICGameplay);
         LevelManager.Ins.SetGameState(Constant.GameState.PLAY);
         CinemachineManager.Ins.SwitchToPlayCam();
+        UIManager.Ins.GetUI(UIID.UICCoin).Close();
         Close();
     }
 
