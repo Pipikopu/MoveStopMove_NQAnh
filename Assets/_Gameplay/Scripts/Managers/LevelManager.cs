@@ -24,12 +24,6 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        //level = PlayerPrefs.GetInt("CurrentLevel", 0);
-        //if (level >= levelDatas.Count)
-        //{
-        //    level = 0;
-        //    PlayerPrefs.SetInt("CurrentLevel", 0);
-        //}
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         if (data.level >= levelDatas.Count)
         {
@@ -90,12 +84,12 @@ public class LevelManager : Singleton<LevelManager>
 
     public void StartGame(int level)
     {
-        //PlayerPrefs.SetInt("CurrentLevel", level);
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         data.level = level;
         PlayerDataController.Ins.SaveToJson(data);
 
         SimplePool.ReleaseAll();
+        player.playerSkin.CheckUnlockOneTime();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

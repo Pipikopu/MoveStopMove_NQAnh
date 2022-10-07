@@ -62,7 +62,7 @@ MonoBehaviour:
   bulletRenderTransform: {fileID: 5009237366287052110}
   meshRend: {fileID: 5009237366284627886}
   range: 6
-  speed: 8
+  speed: 6
 --- !u!1001 &5009237366286661582
 PrefabInstance:
   m_ObjectHideFlags: 0

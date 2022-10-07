@@ -14,7 +14,7 @@ public class TabButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     private void Start()
     {
-        tabGroup.Subscribe(this);
+        //tabGroup.Subscribe(this);
     }
 
     public void OnPointerClick(PointerEventData eventData)

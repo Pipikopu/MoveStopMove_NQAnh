@@ -10,9 +10,19 @@ public class TabGroup : MonoBehaviour
     public TabButton selectedTab;
     public List<GameObject> objectsToSwap;
 
+    public bool preSelected;
+
     private void OnEnable()
     {
-        OnTabSelected(tabButtons[0]);
+        if (preSelected) OnTabSelected(tabButtons[0]);
+    }
+
+    public void PreSelect()
+    {
+        if (selectedTab == null)
+        {
+            OnTabSelected(tabButtons[0]);
+        }
     }
 
     public void Subscribe(TabButton button)

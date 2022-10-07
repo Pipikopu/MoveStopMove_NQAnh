@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b961e62a546664957acc4ed59b9eb0cc, type: 3}
   m_Name: EvilSet
   m_EditorClassIdentifier: 
+  setSkinID: 1
   bodyMatID: 1
-  hatSkinID: 8
+  hatSkinID: 7
   pantSkinID: 4
   tailSkinID: 1
   wingSkinID: 1
+  shieldSkinID: 0
+  setCost: 200

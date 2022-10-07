@@ -11,13 +11,16 @@ public enum WeaponID
 
 public enum WeaponSkinID
 {
-    Hammer_1 = 0,
-    Hammer_2 = 1,
-    Candy0_1 = 2,
-    Candy0_2 = 3,
-    Candy1_1 = 4,
-    Candy2_1 = 5,
-    Axe0 = 6
+    Hammer_Custom = 0,
+    Hammer_1 = 1,
+    Hammer_2 = 2,
+    Candy_Custom = 3,
+    Candy0_1 = 4,
+    Candy0_2 = 5,
+    Candy1_1 = 6,
+    Candy2_1 = 7,
+    Arrow_Custom = 8,
+    Arrow_1 = 9
 }
 
 public enum PantSkinID
@@ -27,6 +30,7 @@ public enum PantSkinID
     dabao = 2,
     onion = 3,
     evil_set = 4,
+    angle_set = 5,
 }
 
 public enum HatSkinID
@@ -37,17 +41,17 @@ public enum HatSkinID
     ear = 3,
     flower = 4,
     hair = 5,
-    hat_cap = 6,
-    headphone = 7,
-    horn = 8,
-    rau = 9
+    headphone = 6,
+    horn = 7,
+    angle_hat = 8
 }
 
 public enum ShieldSkinID
 {
     no_shield = 0,
     black = 1,
-    captain = 2
+    captain = 2,
+    angle_bow = 3
 }
 
 public enum BodyMaterialID
@@ -70,13 +74,15 @@ public enum TailSkinID
 public enum WingSkinID
 {
     no_wing,
-    wing_evil_set
+    wing_evil_set,
+    wing_angle_set
 }
 
 public enum SetSkinID
 {
     no_set = 0,
     evil_set = 1,
+    angle_set = 2
 }
 
 public class ItemController : Singleton<ItemController>

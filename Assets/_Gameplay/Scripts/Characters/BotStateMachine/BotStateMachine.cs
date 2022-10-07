@@ -47,6 +47,7 @@ public class BotStateMachine : Character, ITarget, IHit
     public float timeIdle;
     public float timeAttack;
     public float timeDeath;
+    public float timeMove;
 
     [Header("Weapon")]
     private WeaponID weaponID;

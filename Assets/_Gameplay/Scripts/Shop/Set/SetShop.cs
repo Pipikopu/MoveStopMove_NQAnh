@@ -5,6 +5,7 @@ using UnityEngine;
 public class SetShop : Singleton<SetShop>
 {
     public Player player;
+    public List<SetShopItem> setShopItems;
 
     public void TrySet(SetSkinID setSkinID)
     {
@@ -28,5 +29,13 @@ public class SetShop : Singleton<SetShop>
     public void ResetSet()
     {
         player.GetPlayerSkin().SetItems();
+    }
+
+    public void ResetShop()
+    {
+        for (int i = 0; i < setShopItems.Count; i++)
+        {
+            setShopItems[i].OnInit();
+        }
     }
 }

@@ -8,7 +8,6 @@ public class UICMainMenu : UICanvas
     public Player player;
     public Text playerText;
     public Text placeHolderText;
-    public Text coinsText;
     public Image progressFill;
     public List<Sprite> levelSprites;
     public Image levelIcon;
@@ -17,7 +16,6 @@ public class UICMainMenu : UICanvas
     {
         placeHolderText.text = PlayerDataController.Ins.LoadFromJson().name;
         playerText.text = PlayerDataController.Ins.LoadFromJson().name;
-        coinsText.text = PlayerDataController.Ins.LoadFromJson().coins.ToString();
         progressFill.rectTransform.localScale = new Vector3(PlayerDataController.Ins.LoadFromJson().progress, 1, 1);
         int level = PlayerDataController.Ins.LoadFromJson().level;
         if (level >= levelSprites.Count) level = 0;

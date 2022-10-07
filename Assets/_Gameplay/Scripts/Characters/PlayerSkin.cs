@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class PlayerSkin : MonoBehaviour
 {
@@ -34,127 +35,33 @@ public class PlayerSkin : MonoBehaviour
 
     public void SetItems()
     {
+        InitHat();
         InitWing();
         InitTail();
         InitBody();
         InitPant();
-        InitHat();
         InitShield();
     }
 
-    #region Initialize Skin
-    private void InitPant()
+    public void CheckUnlockOneTime()
     {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_PANT))
-            pantSkinID = (PantSkinID)PlayerPrefs.GetInt(Constant.SELECTED_PANT);
-        else
-            pantSkinID = (PantSkinID)0;
-
-        Material pantMat = SkinController.Ins.GetPantMaterial(pantSkinID);
-        var materials = pantRend.sharedMaterials;
-        materials[0] = pantMat;
-        pantRend.sharedMaterials = materials;
+        CheckUnlockOneTimeHat();
+        CheckUnlockOneTimePant();
+        CheckUnlockOneTimeShield();
     }
 
+    // Hat
     private void InitHat()
     {
-        if (hatItem != null)
-            Destroy(hatItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_HAT))
-            hatSkinID = (HatSkinID)PlayerPrefs.GetInt(Constant.SELECTED_HAT);
-        else
-            hatSkinID = (HatSkinID)0;
-
-        hatItem = ItemController.Ins.SetHat(hatSkinID, hatHolder);
-    }
-
-    private void InitShield()
-    {
-        if (shieldItem != null)
-            Destroy(shieldItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_SHIELD))
-            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt(Constant.SELECTED_SHIELD);
-        else
-            shieldSkinID = (ShieldSkinID)0;
-
-        shieldItem = ItemController.Ins.SetShield(shieldSkinID, shieldHolder);
-    }
-
-    private void InitBody()
-    {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_BODY))
-            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt(Constant.SELECTED_BODY);
-        else
-            bodyMatID = (BodyMaterialID)0;
-
-        Material bodyMat = SkinController.Ins.GetBodyMaterial(bodyMatID);
-        var materials = bodyRend.sharedMaterials;
-        materials[0] = bodyMat;
-        bodyRend.sharedMaterials = materials;
-    }
-
-    private void InitTail()
-    {
-        if (tailItem != null)
-            Destroy(tailItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_TAIL))
-            tailSkinID = (TailSkinID)PlayerPrefs.GetInt(Constant.SELECTED_TAIL);
-        else
-            tailSkinID = (TailSkinID)0;
-
-        tailItem = ItemController.Ins.SetTail(tailSkinID, tailHolder);
-    }
-
-    private void InitWing()
-    {
-        if (wingItem != null)
-            Destroy(wingItem.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WING))
-            wingSkinID = (WingSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WING);
-        else
-            wingSkinID = (WingSkinID)0;
-
-        wingItem = ItemController.Ins.SetWing(wingSkinID, wingHolder);
-    }
-    #endregion
-
-    #region Change Skin
-    public void ChangePant()
-    {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_PANT))
-            pantSkinID = (PantSkinID)PlayerPrefs.GetInt(Constant.SELECTED_PANT);
-        else
-            pantSkinID = (PantSkinID)0;
-
-        Material pantMat = SkinController.Ins.GetPantMaterial(pantSkinID);
-        var materials = pantRend.sharedMaterials;
-        materials[0] = pantMat;
-        pantRend.sharedMaterials = materials;
-    }
-
-    public void TryPant(PantSkinID pantSkinID)
-    {
-        Material pantMat = SkinController.Ins.GetPantMaterial(pantSkinID);
-        var materials = pantRend.sharedMaterials;
-        materials[0] = pantMat;
-        pantRend.sharedMaterials = materials;
+        ChangeHat();
     }
 
     public void ChangeHat()
     {
-        if (hatItem != null)
-            Destroy(hatItem.gameObject);
+        PlayerData playerData = PlayerDataController.Ins.LoadFromJson();
+        hatSkinID = (HatSkinID)playerData.hatID;
 
-        if (PlayerPrefs.HasKey(Constant.SELECTED_HAT))
-            hatSkinID = (HatSkinID)PlayerPrefs.GetInt(Constant.SELECTED_HAT);
-        else
-            hatSkinID = (HatSkinID)0;
-
-        hatItem = ItemController.Ins.SetHat(hatSkinID, hatHolder);
+        TryHat(hatSkinID);
     }
 
     public void TryHat(HatSkinID hatSkinID)
@@ -165,17 +72,77 @@ public class PlayerSkin : MonoBehaviour
         hatItem = ItemController.Ins.SetHat(hatSkinID, hatHolder);
     }
 
+    private void CheckUnlockOneTimeHat()
+    {
+        PlayerData playerData = PlayerDataController.Ins.LoadFromJson();
+        string itemJson = File.ReadAllText(Application.dataPath + Constant.ITEM_STATE_PATH);
+        ItemUnlockData itemData = JsonUtility.FromJson<ItemUnlockData>(itemJson);
+        if (itemData.hatItemStates[(int)hatSkinID] == (int)Constant.ItemState.EquipOneTime)
+        {
+            itemData.hatItemStates[(int)hatSkinID] = (int)Constant.ItemState.Lock;
+            hatSkinID = 0;
+            playerData.hatID = 0;
+
+            itemJson = JsonUtility.ToJson(itemData);
+
+            PlayerDataController.Ins.SaveToJson(playerData);
+            File.WriteAllText(Application.dataPath + Constant.ITEM_STATE_PATH, itemJson);
+        }
+    }
+
+
+    // Pant
+    private void InitPant()
+    {
+        ChangePant();
+    }
+
+    public void ChangePant()
+    {
+        PlayerData playerData = PlayerDataController.Ins.LoadFromJson();
+        pantSkinID = (PantSkinID)playerData.pantID;
+
+        TryPant(pantSkinID);
+    }
+
+    public void TryPant(PantSkinID pantSkinID)
+    {
+        Material pantMat = SkinController.Ins.GetPantMaterial(pantSkinID);
+        var materials = pantRend.sharedMaterials;
+        materials[0] = pantMat;
+        pantRend.sharedMaterials = materials;
+    }
+
+    private void CheckUnlockOneTimePant()
+    {
+        PlayerData playerData = PlayerDataController.Ins.LoadFromJson();
+        string itemJson = File.ReadAllText(Application.dataPath + Constant.ITEM_STATE_PATH);
+        ItemUnlockData itemData = JsonUtility.FromJson<ItemUnlockData>(itemJson);
+        if (itemData.pantItemStates[(int)pantSkinID] == (int)Constant.ItemState.EquipOneTime)
+        {
+            itemData.pantItemStates[(int)pantSkinID] = (int)Constant.ItemState.Lock;
+            pantSkinID = 0;
+            playerData.pantID = 0;
+
+            itemJson = JsonUtility.ToJson(itemData);
+
+            PlayerDataController.Ins.SaveToJson(playerData);
+            File.WriteAllText(Application.dataPath + Constant.ITEM_STATE_PATH, itemJson);
+        }
+    }
+
+    //Shield
+    private void InitShield()
+    {
+        ChangeShield();
+    }
+
     public void ChangeShield()
     {
-        if (shieldItem != null)
-            Destroy(shieldItem.gameObject);
+        PlayerData playerData = PlayerDataController.Ins.LoadFromJson();
+        shieldSkinID = (ShieldSkinID)playerData.shieldID;
 
-        if (PlayerPrefs.HasKey(Constant.SELECTED_SHIELD))
-            shieldSkinID = (ShieldSkinID)PlayerPrefs.GetInt(Constant.SELECTED_SHIELD);
-        else
-            shieldSkinID = (ShieldSkinID)0;
-
-        shieldItem = ItemController.Ins.SetShield(shieldSkinID, shieldHolder);
+        TryShield(shieldSkinID);
     }
 
     public void TryShield(ShieldSkinID shieldSkinID)
@@ -186,17 +153,36 @@ public class PlayerSkin : MonoBehaviour
         shieldItem = ItemController.Ins.SetShield(shieldSkinID, shieldHolder);
     }
 
+    private void CheckUnlockOneTimeShield()
+    {
+        PlayerData playerData = PlayerDataController.Ins.LoadFromJson();
+        string itemJson = File.ReadAllText(Application.dataPath + Constant.ITEM_STATE_PATH);
+        ItemUnlockData itemData = JsonUtility.FromJson<ItemUnlockData>(itemJson);
+        if (itemData.shieldItemStates[(int)shieldSkinID] == (int)Constant.ItemState.EquipOneTime)
+        {
+            itemData.shieldItemStates[(int)shieldSkinID] = (int)Constant.ItemState.Lock;
+            shieldSkinID = 0;
+            playerData.shieldID = 0;
+
+            itemJson = JsonUtility.ToJson(itemData);
+
+            PlayerDataController.Ins.SaveToJson(playerData);
+            File.WriteAllText(Application.dataPath + Constant.ITEM_STATE_PATH, itemJson);
+        }
+    }
+
+    // Body
+    private void InitBody()
+    {
+        ChangeBody();
+    }
+
     public void ChangeBody()
     {
-        if (PlayerPrefs.HasKey(Constant.SELECTED_BODY))
-            bodyMatID = (BodyMaterialID)PlayerPrefs.GetInt(Constant.SELECTED_BODY);
-        else
-            bodyMatID = (BodyMaterialID)0;
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        bodyMatID = (BodyMaterialID)data.bodyID;
 
-        Material bodyMat = SkinController.Ins.GetBodyMaterial(bodyMatID);
-        var materials = bodyRend.sharedMaterials;
-        materials[0] = bodyMat;
-        bodyRend.sharedMaterials = materials;
+        TryBody(bodyMatID);
     }
 
     public void TryBody(BodyMaterialID bodyMatId)
@@ -207,17 +193,18 @@ public class PlayerSkin : MonoBehaviour
         bodyRend.sharedMaterials = materials;
     }
 
+    // Tail
+    private void InitTail()
+    {
+        ChangeTail();
+    }
+
     public void ChangeTail()
     {
-        if (tailItem != null)
-            Destroy(tailItem.gameObject);
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        tailSkinID = (TailSkinID)data.tailID;
 
-        if (PlayerPrefs.HasKey(Constant.SELECTED_TAIL))
-            tailSkinID = (TailSkinID)PlayerPrefs.GetInt(Constant.SELECTED_TAIL);
-        else
-            tailSkinID = (TailSkinID)0;
-
-        tailItem = ItemController.Ins.SetTail(tailSkinID, tailHolder);
+        TryTail(tailSkinID);
     }
 
     public void TryTail(TailSkinID tailSkinID)
@@ -228,17 +215,19 @@ public class PlayerSkin : MonoBehaviour
         tailItem = ItemController.Ins.SetTail(tailSkinID, tailHolder);
     }
 
+    // Wing
+    private void InitWing()
+    {
+        ChangeWing();
+    }
+
     public void ChangeWing()
     {
-        if (wingItem != null)
-            Destroy(wingItem.gameObject);
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        wingSkinID = (WingSkinID)data.wingID;
 
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WING))
-            wingSkinID = (WingSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WING);
-        else
-            wingSkinID = (WingSkinID)0;
+        TryWing(wingSkinID);
 
-        wingItem = ItemController.Ins.SetWing(wingSkinID, wingHolder);
     }
 
     public void TryWing(WingSkinID wingSkinID)
@@ -248,5 +237,4 @@ public class PlayerSkin : MonoBehaviour
 
         wingItem = ItemController.Ins.SetWing(wingSkinID, wingHolder);
     }
-    #endregion
 }

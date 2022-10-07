@@ -5,6 +5,7 @@ using UnityEngine;
 public class HatShop : Singleton<HatShop>
 {
     public Player player;
+    public List<HatShopItem> hatShopItems;
 
     public void TryHat(HatSkinID hatSkinID)
     {
@@ -19,5 +20,13 @@ public class HatShop : Singleton<HatShop>
     public void ResetHat()
     {
         player.GetPlayerSkin().SetItems();
+    }
+
+    public void ResetShop()
+    {
+        for (int i = 0; i < hatShopItems.Count; i++)
+        {
+            hatShopItems[i].OnInit();
+        }
     }
 }

@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: 3D
+    uniqueID: 496207293
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

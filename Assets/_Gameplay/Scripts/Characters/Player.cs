@@ -135,18 +135,17 @@ public class Player : Character, ITarget
 
     private void InitWeapon()
     {
+        ChangeWeapon();
+    }
+
+    public void ChangeWeapon()
+    {
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        weaponID = (WeaponID)data.weaponID;
+        weaponSkinID = (WeaponSkinID)data.weaponSkinID;
+
         if (weapon != null)
             Destroy(weapon.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON))
-            weaponID = (WeaponID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON);
-        else
-            weaponID = (WeaponID)0;
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON_SKIN))
-            weaponSkinID = (WeaponSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON_SKIN);
-        else
-            weaponSkinID = (WeaponSkinID)0;
 
         weapon = ItemController.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
     }
@@ -308,24 +307,6 @@ public class Player : Character, ITarget
         }
     }
     #endregion
-
-    public void ChangeWeapon()
-    {
-        if (weapon != null)
-            Destroy(weapon.gameObject);
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON))
-            weaponID = (WeaponID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON);
-        else
-            weaponID = (WeaponID)0;
-
-        if (PlayerPrefs.HasKey(Constant.SELECTED_WEAPON_SKIN))
-            weaponSkinID = (WeaponSkinID)PlayerPrefs.GetInt(Constant.SELECTED_WEAPON_SKIN);
-        else
-            weaponSkinID = (WeaponSkinID)0;
-
-        weapon = ItemController.Ins.SetWeapon(weaponID, weaponSkinID, weaponHolder);
-    }
 
     public PlayerSkin GetPlayerSkin()
     {

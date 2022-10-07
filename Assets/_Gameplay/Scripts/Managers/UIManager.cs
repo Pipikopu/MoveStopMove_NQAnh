@@ -12,7 +12,8 @@ public enum UIID
     UICVictory = 2,
     UICFail = 3,
     UICWeaponShop = 4,
-    UICSkinShop = 5
+    UICSkinShop = 5,
+    UICCoin = 6
 }
 
 public class UIManager : Singleton<UIManager>
@@ -38,6 +39,7 @@ public class UIManager : Singleton<UIManager>
         }
 
         OpenUI(startCanvasId);
+        OpenUI(UIID.UICCoin);
     }
 
     #region Canvas

@@ -18,6 +18,7 @@ public class UICSkinShop : UICanvas
 
     public void ExitSkinShop()
     {
+        player.playerSkin.OnInit();
         UIManager.Ins.OpenUI(UIID.UICMainMenu);
         CinemachineManager.Ins.SwitchToStartGameCam();
         Close();

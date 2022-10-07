@@ -5,6 +5,7 @@ using UnityEngine;
 public class PantShop : Singleton<PantShop>
 {
     public Player player;
+    public List<PantShopItem> pantShopItems;
 
     public void TryPant(PantSkinID pantSkinID)
     {
@@ -19,5 +20,13 @@ public class PantShop : Singleton<PantShop>
     public void ResetPant()
     {
         player.GetPlayerSkin().SetItems();
+    }
+
+    public void ResetShop()
+    {
+        for (int i = 0; i < pantShopItems.Count; i++)
+        {
+            pantShopItems[i].OnInit();
+        }
     }
 }

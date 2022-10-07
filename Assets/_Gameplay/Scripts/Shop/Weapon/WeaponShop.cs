@@ -10,17 +10,17 @@ public class WeaponShop : Singleton<WeaponShop>
 
     public Player player;
 
-    private void Start()
+    private void OnEnable()
     {
-        //currentWeaponIndex = 0;
-        //OpenWeaponShop(weaponShops[0]);
         Init();
     }
 
     private void Init()
     {
-        int currentWeaponIndex = PlayerPrefs.GetInt("SelectedWeapon");
-        OpenWeaponShop(weaponShops[currentWeaponIndex]);
+        PlayerData data = PlayerDataController.Ins.LoadFromJson();
+        currentWeaponIndex = data.weaponID;
+        OpenWeaponShop(weaponShops[(int)data.weaponID]);
+        //OpenWeaponShop(weaponShops[0]);
 
     }
 

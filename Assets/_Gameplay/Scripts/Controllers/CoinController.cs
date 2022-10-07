@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CoinController : Singleton<CoinController>
 {
     private int coins;
+    public Text coinText;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class CoinController : Singleton<CoinController>
         coins -= decreaseAmount;
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         data.coins = coins;
+        coinText.text = coins.ToString();
         PlayerDataController.Ins.SaveToJson(data);
     }
 
