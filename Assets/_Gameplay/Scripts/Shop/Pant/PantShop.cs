@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class PantShop : Singleton<PantShop>
 {
-    public Player player;
     public List<PantShopItem> pantShopItems;
 
     public void TryPant(PantSkinID pantSkinID)
     {
-        player.GetPlayerSkin().TryPant(pantSkinID);
+        UIManager.Ins.player.GetPlayerSkin().TryPant(pantSkinID);
     }
 
     public void ChoosePant()
     {
-        player.GetPlayerSkin().ChangePant();
+        UIManager.Ins.player.GetPlayerSkin().ChangePant();
     }
 
     public void ResetPant()
     {
-        player.GetPlayerSkin().SetItems();
+        UIManager.Ins.player.GetPlayerSkin().SetItems();
     }
 
     public void ResetShop()

@@ -15,7 +15,8 @@ public enum UIID
     UICSkinShop = 5,
     UICCoin = 6,
     UICSetting = 7,
-    UICRevive = 8
+    UICRevive = 8,
+    UICFreeItem = 9
 }
 
 public class UIManager : Singleton<UIManager>

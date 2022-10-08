@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UICMainMenu : UICanvas
 {
-    public Player player;
+    //public Player player;
     public Text playerText;
     public Text placeHolderText;
     public Image progressFill;
@@ -56,8 +56,6 @@ public class UICMainMenu : UICanvas
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         data.name = newName;
         PlayerDataController.Ins.SaveToJson(data);
-        player.InitName();
+        UIManager.Ins.player.InitName();
     }
-
-
 }

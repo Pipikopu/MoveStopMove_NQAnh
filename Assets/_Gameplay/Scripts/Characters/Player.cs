@@ -128,7 +128,7 @@ public class Player : Character, ITarget
 
     private void FixedUpdate()
     {
-        MoveCharacter(movement);
+        MoveCharacter(movement.normalized);
     }
 
     private void ActivateUI(bool activate)
@@ -280,6 +280,7 @@ public class Player : Character, ITarget
 
     public void Revive()
     {
+        canAttack = false;
         isDead = false;
         playerAnimator.SetBool(Constant.ANIM_IS_DEAD, false);
         playerAnimator.SetBool(Constant.ANIM_IS_IDLE, true);

@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class UICSkinShop : UICanvas
 {
-    public Player player;
-
     public void OnEnable()
     {
-        player.ChooseSkinAnim();    
+        UIManager.Ins.player.ChooseSkinAnim();    
     }
 
     public void OnDisable()
     {
-        player.ExitSkinAnim();        
+        UIManager.Ins.player.ExitSkinAnim();        
     }
 
     public void ExitSkinShop()
     {
-        player.playerSkin.OnInit();
+        UIManager.Ins.player.playerSkin.OnInit();
         UIManager.Ins.OpenUI(UIID.UICMainMenu);
         CinemachineManager.Ins.SwitchToStartGameCam();
         Close();

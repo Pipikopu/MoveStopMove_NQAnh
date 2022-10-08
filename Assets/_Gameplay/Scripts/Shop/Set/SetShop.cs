@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class SetShop : Singleton<SetShop>
 {
-    public Player player;
+    private Player player;
     public List<SetShopItem> setShopItems;
+
+    private void OnEnable()
+    {
+        player = UIManager.Ins.player;
+    }
 
     public void TrySet(SetSkinID setSkinID)
     {

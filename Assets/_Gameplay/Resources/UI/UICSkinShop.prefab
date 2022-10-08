@@ -21486,7 +21486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcc5d8ef31fc4e3ea0af5396c08dd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   setShopItems:
   - {fileID: 65865333}
   - {fileID: 708603628}
@@ -21998,7 +21997,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
-  player: {fileID: 0}
 --- !u!223 &1890191944
 Canvas:
   m_ObjectHideFlags: 0
@@ -22196,7 +22194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9600d7f7df4ec48bdba59a06b6c89f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   shieldShopItems:
   - {fileID: 712024401}
   - {fileID: 2116623431}
@@ -23168,7 +23165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296799ce6f5224411b96a8b329e2650a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   pantShopItems:
   - {fileID: 3233133770834354893}
   - {fileID: 3233133770432958865}
@@ -23343,7 +23339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f111ec9bfc643e48360afc64105869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   hatShopItems:
   - {fileID: 1443086478}
   - {fileID: 412215305}
