@@ -7,9 +7,9 @@ public class SoundButton : MonoBehaviour
     public GameObject soundButtonOn;
     public GameObject soundButtonOff;
 
-    private void Start()
+    private void OnEnable()
     {
-        if (PlayerPrefs.GetInt("SoundOn", 1) == 1)
+        if (PlayerPrefs.GetInt(Constant.SOUND_ON, 1) == 1)
         {
             soundButtonOn.SetActive(true);
             soundButtonOff.SetActive(false);
@@ -25,17 +25,15 @@ public class SoundButton : MonoBehaviour
 
     public void SetOnOffSound()
     {
-        var soundValue = PlayerPrefs.GetInt("SoundOn");
+        var soundValue = PlayerPrefs.GetInt(Constant.SOUND_ON);
         if (soundValue == 0)
         {
-            PlayerPrefs.SetInt("SoundOn", 1);
             soundButtonOn.SetActive(true);
             soundButtonOff.SetActive(false);
             SoundManager.Ins.TurnOnSound();
         }
         else if (soundValue == 1)
         {
-            PlayerPrefs.SetInt("SoundOn", 0);
             soundButtonOn.SetActive(false);
             soundButtonOff.SetActive(true);
             SoundManager.Ins.TurnOffSound();

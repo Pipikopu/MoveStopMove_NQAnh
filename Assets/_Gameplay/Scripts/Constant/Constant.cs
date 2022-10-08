@@ -19,18 +19,10 @@ public static class Constant
 
     public const string ANIM_ATTACK = "Attack";
 
+    public const string SOUND_ON = "SoundOn";
+    public const string VIBRATE_ON = "VibrateOn";
+
     public enum GameState { PAUSE, PLAY, CHOOSESKIN, END};
-
-    //public const string SELECTED_WEAPON = "SelectedWeapon";
-    //public const string SELECTED_WEAPON_SKIN = "SelectedWeaponSkin";
-
-    //public const string SELECTED_PANT = "SelectedPant";
-    //public const string SELECTED_HAT = "SelectedHat";
-    //public const string SELECTED_SHIELD = "SelectedShield";
-    //public const string SELECTED_BODY = "SelectedBody";
-    //public const string SELECTED_TAIL = "SelectedTail";
-    //public const string SELECTED_WING = "SelectedWing";
-    //public const string SELECTED_SET = "SelectedSet";
 
     public const string OBSTACLE = "Obstacle";
 

@@ -25,6 +25,7 @@ public class UICMainMenu : UICanvas
         levelIcon.sprite = levelSprites[level];
         zoneText.text = "Zone: " + (level + 1).ToString();
         bestRank.text = "Best: $" + data.bestRank.ToString();
+
     }
 
     public void PlayGame()

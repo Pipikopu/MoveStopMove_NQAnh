@@ -15,24 +15,34 @@ public class SoundManager : Singleton<SoundManager>
     private bool soundOn;
     private bool vibrateOn;
 
+    private void OnEnable()
+    {
+        soundOn = (PlayerPrefs.GetInt(Constant.SOUND_ON, 1) == 1);
+        vibrateOn = (PlayerPrefs.GetInt(Constant.VIBRATE_ON, 1) == 1);
+    }
+
     public void TurnOnSound()
     {
         soundOn = true;
+        PlayerPrefs.SetInt(Constant.SOUND_ON, 1);
     }
 
     public void TurnOffSound()
     {
         soundOn = false;
+        PlayerPrefs.SetInt(Constant.SOUND_ON, 0);
     }
 
     public void TurnVibrateOn()
     {
         vibrateOn = true;
+        PlayerPrefs.SetInt(Constant.VIBRATE_ON, 1);
     }
 
     public void TurnVibrateOff()
     {
         vibrateOn = false;
+        PlayerPrefs.SetInt(Constant.VIBRATE_ON, 0);
     }
 
     public void PlayThrowSound()
