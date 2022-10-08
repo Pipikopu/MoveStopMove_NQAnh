@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class SetShop : Singleton<SetShop>
 {
-    private Player player;
+    public Player player;
     public List<SetShopItem> setShopItems;
-
-    private void OnEnable()
-    {
-        player = UIManager.Ins.player;
-    }
 
     public void TrySet(SetSkinID setSkinID)
     {
@@ -20,6 +15,7 @@ public class SetShop : Singleton<SetShop>
         player.GetPlayerSkin().TryHat(set.hatSkinID);
         player.GetPlayerSkin().TryTail(set.tailSkinID);
         player.GetPlayerSkin().TryWing(set.wingSkinID);
+        player.GetPlayerSkin().TryShield(set.shieldSkinID);
     }
 
     public void ChooseSet()
@@ -29,6 +25,7 @@ public class SetShop : Singleton<SetShop>
         player.GetPlayerSkin().ChangeHat();
         player.GetPlayerSkin().ChangeTail();
         player.GetPlayerSkin().ChangeWing();
+        player.GetPlayerSkin().ChangeShield();
     }
 
     public void ResetSet()
