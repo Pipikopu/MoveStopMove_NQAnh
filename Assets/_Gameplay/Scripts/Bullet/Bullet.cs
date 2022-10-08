@@ -73,14 +73,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-
     // Specific movement for each type of bullet
     protected virtual void SpecialMove() { }
 
-
-    // Initialize skin for each buller
+    // Initialize skin for each bullet
     public virtual void InitSkin(WeaponSkinID SkinID) { }
-
 
     #region SetInitValues
     public void SetOriginWeapon(GameObject weapon)
@@ -104,7 +101,5 @@ public class Bullet : MonoBehaviour
         directionVector = vector;
     }
     #endregion
-
-
 
 }

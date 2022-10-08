@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
+    // Renderer
     public Renderer obstaclesRend;
+
+    // Material to change
     public Material transparentMat;
     public Material normalMat;
 

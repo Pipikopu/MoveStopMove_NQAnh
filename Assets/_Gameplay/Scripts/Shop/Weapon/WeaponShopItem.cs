@@ -96,23 +96,28 @@ public class WeaponShopItem : MonoBehaviour
 
     private void SelectWeaponSkin()
     {
+        // Load Item Data from Json File
         string itemJson = File.ReadAllText(Application.dataPath + Constant.ITEM_STATE_PATH);
         ItemUnlockData itemData = JsonUtility.FromJson<ItemUnlockData>(itemJson);
 
-
+        // Load Player Data from Json File
         string playerJson = File.ReadAllText(Application.dataPath + Constant.PLAYER_DATA_PATH);
         PlayerData playerData = JsonUtility.FromJson<PlayerData>(playerJson);
 
+        // Reset current weapon
         int currentWeapon = playerData.weaponID;
         itemData.weaponSkinStates[currentWeapon] = (int)Constant.ItemState.NotEquip;
         playerData.weaponID = (int)weaponSkinSO.weaponID;
 
+        // Reset current skin
         int currentWeaponSkin = playerData.weaponSkinID;
         itemData.weaponSkinStates[currentWeaponSkin] = (int)Constant.ItemState.NotEquip;
         playerData.weaponSkinID = (int)weaponSkinSO.weaponSkinID;
 
+        // Set Skin state
         itemData.weaponSkinStates[(int)weaponSkinSO.weaponSkinID] = (int)Constant.ItemState.Equip;
 
+        // Save Data
         itemJson = JsonUtility.ToJson(itemData);
         playerJson = JsonUtility.ToJson(playerData);
 
@@ -140,12 +145,5 @@ public class WeaponShopItem : MonoBehaviour
             return 0;
         }
 
-    }
-
-    public void ChooseWeapon()
-    {
-        //PlayerPrefs.SetInt(Constant.SELECTED_WEAPON, (int)weaponId);
-        //PlayerPrefs.SetInt(Constant.SELECTED_WEAPON_SKIN, (int)weaponSkinId);
-        //WeaponShop.Ins.ChooseWeapon();
     }
 }

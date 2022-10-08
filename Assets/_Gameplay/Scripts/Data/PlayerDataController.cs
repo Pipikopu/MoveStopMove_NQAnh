@@ -13,20 +13,21 @@ public class PlayerDataController : Singleton<PlayerDataController>
     public void SaveToJson(PlayerData data)
     {
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.dataPath + "/_Gameplay/JSonFiles/saveFile.json", json);
+        File.WriteAllText(Application.dataPath + Constant.PLAYER_DATA_PATH, json);
     }
 
     public PlayerData LoadFromJson()
     {
-        if (File.Exists(Application.dataPath + "/_Gameplay/JSonFiles/saveFile.json"))
+        if (File.Exists(Application.dataPath + Constant.PLAYER_DATA_PATH))
         {
-            string json = File.ReadAllText(Application.dataPath + "/_Gameplay/JSonFiles/saveFile.json");
+            string json = File.ReadAllText(Application.dataPath + Constant.PLAYER_DATA_PATH);
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
 
             return data;
         }
         else
         {
+            // Set new information
             PlayerData data = new PlayerData
             {
                 name = "Player",

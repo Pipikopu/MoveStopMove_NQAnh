@@ -5,16 +5,21 @@ using UnityEngine.UI;
 
 public class Indicator : MonoBehaviour
 {
+    // Target character
     public Transform target;
+    public Character originCharacter;
+
+    // UI
     public GameObject followImage;
     public GameObject nameTextObj;
     public Text scoreText;
-    public Character originCharacter;
     public Image scoreHolder;
     public Text nameText;
 
+    // Material
     private Material indicatorMat;
 
+    // Other variables
     private bool nameAvailable;
 
     public void SetOriginCharacter(Character character)
@@ -27,11 +32,6 @@ public class Indicator : MonoBehaviour
     private void SetTarget()
     {
         target = originCharacter.transform;
-    }
-
-    private void SetScore()
-    {
-        scoreText.text = originCharacter.GetScore().ToString();
     }
 
     public void SetMaterial()
@@ -49,8 +49,9 @@ public class Indicator : MonoBehaviour
     private void Update()
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(target.position);
-        nameAvailable = true;
 
+        // Check name valid + set screenPos
+        nameAvailable = true;
         if (screenPos.x < 0)
         {
             screenPos.x = Screen.width / 12;
@@ -61,7 +62,6 @@ public class Indicator : MonoBehaviour
             screenPos.x = Screen.width * 11 / 12;
             nameAvailable = false;
         }
-
         if (screenPos.y < 0)
         {
             screenPos.y = Screen.height / 15;
@@ -73,6 +73,7 @@ public class Indicator : MonoBehaviour
             nameAvailable = false;
         }
 
+        // Set UI state
         if (nameTextObj.activeInHierarchy == false && nameAvailable)
         {
             nameTextObj.SetActive(true);
@@ -81,9 +82,13 @@ public class Indicator : MonoBehaviour
         {
             nameTextObj.SetActive(false);
         }
-
         followImage.transform.position = new Vector2(screenPos.x, screenPos.y + Screen.height / 8);
 
         SetScore();
+    }
+
+    private void SetScore()
+    {
+        scoreText.text = originCharacter.GetScore().ToString();
     }
 }

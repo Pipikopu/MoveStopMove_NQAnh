@@ -10,7 +10,7 @@ public class UICVictory : UICanvas
 
     private void OnEnable()
     {
-        string level = PlayerDataController.Ins.LoadFromJson().level.ToString() + 2;
+        string level = (PlayerDataController.Ins.LoadFromJson().level + 2).ToString();
         unlockText.text = "Unlock Level " + level;
 
         coinText.text = UIManager.Ins.player.GetScore().ToString();

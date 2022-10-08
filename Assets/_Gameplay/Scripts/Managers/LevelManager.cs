@@ -6,24 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    // Characters
+    public Player player;
+    private Character finalKiller;
+
+    // Game Plane
     public Transform planeHolder;
-    public List<LevelData> levelDatas;
     private GameObject gamePlane;
 
+    // Level datas
+    public List<LevelData> levelDatas;
+
+    // Variables in one level
+    private int level;
+    private Constant.GameState gameState;
+
+    // Bot variables
     private int numOfBots;
     private int numOfTotalBots;
     private int numOfBotsDie = 0;
 
-    private int level;
-
-    private Character finalKiller;
-
-    private Constant.GameState gameState;
-
-    public Player player;
-
     private void Start()
     {
+        // Get level
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         if (data.level >= levelDatas.Count)
         {
@@ -32,14 +37,16 @@ public class LevelManager : Singleton<LevelManager>
         }
         level = data.level;
 
+        // Init plane
         gamePlane = Instantiate(levelDatas[level].gamePlane, planeHolder);
 
-        numOfTotalBots = levelDatas[level].numOfBots;
-
-        numOfBots = numOfTotalBots;
+        // Init bot variables
         numOfBotsDie = 0;
+        numOfTotalBots = levelDatas[level].numOfBots;
+        numOfBots = numOfTotalBots;
     }
 
+    #region Bot variables
     public void DecreaseNumOfBots(int decreaseNum)
     {
         numOfBots -= decreaseNum;
@@ -56,17 +63,13 @@ public class LevelManager : Singleton<LevelManager>
         return numOfBotsDie;
     }
 
-    public void Win()
+    public int GetNumOfTotalBots()
     {
-        gameState = Constant.GameState.END;
+        return numOfTotalBots;
     }
+    #endregion
 
-    public void Lose(Character killer)
-    {
-        gameState = Constant.GameState.END;
-        finalKiller = killer;
-    }
-
+    #region Game State
     public Constant.GameState GetGameState()
     {
         return gameState;
@@ -76,10 +79,18 @@ public class LevelManager : Singleton<LevelManager>
     {
         gameState = newGameState;
     }
+    #endregion
 
-    public Character GetFinalKiller()
+    #region Game Function
+    public void Win()
     {
-        return finalKiller;
+        gameState = Constant.GameState.END;
+    }
+
+    public void Lose(Character killer)
+    {
+        gameState = Constant.GameState.END;
+        finalKiller = killer;
     }
 
     public void StartGame(int level)
@@ -98,10 +109,11 @@ public class LevelManager : Singleton<LevelManager>
         SimplePool.ReleaseAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    #endregion
 
-    public int GetNumOfTotalBots()
+    public Character GetFinalKiller()
     {
-        return numOfTotalBots;
+        return finalKiller;
     }
 
     public LevelData GetLevelData(int level)

@@ -90,7 +90,6 @@ public class PlayerSkin : MonoBehaviour
         }
     }
 
-
     // Pant
     private void InitPant()
     {

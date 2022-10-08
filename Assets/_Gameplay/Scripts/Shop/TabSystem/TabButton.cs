@@ -12,10 +12,7 @@ public class TabButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public UnityEvent onTabSelected;
     public UnityEvent onTabDeselected;
 
-    private void Start()
-    {
-        //tabGroup.Subscribe(this);
-    }
+    private void Start() { }
 
     public void OnPointerClick(PointerEventData eventData)
     {

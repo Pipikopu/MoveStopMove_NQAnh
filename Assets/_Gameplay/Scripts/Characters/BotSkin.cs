@@ -5,7 +5,6 @@ using UnityEngine;
 public class BotSkin : MonoBehaviour
 {
     public SkinnedMeshRenderer bodyRend;
-
     public SkinnedMeshRenderer pantRend;
 
     private Item hatItem;

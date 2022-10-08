@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WeaponShop : Singleton<WeaponShop>
 {
+    // Weapon
     public List<GameObject> weaponShops;
-
     private int currentWeaponIndex;
 
+    // Player
     public Player player;
 
     private void OnEnable()
@@ -17,11 +18,10 @@ public class WeaponShop : Singleton<WeaponShop>
 
     private void Init()
     {
+        // Open current weapon
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         currentWeaponIndex = data.weaponID;
         OpenWeaponShop(weaponShops[(int)data.weaponID]);
-        //OpenWeaponShop(weaponShops[0]);
-
     }
 
     private void ResetShops()

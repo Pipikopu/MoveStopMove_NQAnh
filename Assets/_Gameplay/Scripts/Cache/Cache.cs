@@ -9,6 +9,8 @@ public class Cache : Singleton<Cache>
     private Dictionary<GameObject, Indicator> objToIndicator = new Dictionary<GameObject, Indicator>();
     public Dictionary<GameObject, GameObject> botGOToIndicatorGO = new Dictionary<GameObject, GameObject>();
 
+
+    #region Interface: IHit, ITarget
     public IHit GetIHitFromGameObj(GameObject obj)
     {
         if (!objToIHit.ContainsKey(obj))
@@ -34,23 +36,9 @@ public class Cache : Singleton<Cache>
 
         return objToITarget[obj];
     }
+    #endregion
 
-    public Indicator GetIndicatorFromGameObj(GameObject obj)
-    {
-        if (!objToIndicator.ContainsKey(obj) || objToIndicator[obj] == null)
-        {
-            Indicator newIndicator = obj.GetComponent<Indicator>();
-            if (newIndicator == null)
-            {
-                Debug.Log("Null Indicator");
-                return null;
-            }
-            else
-                objToIndicator[obj] = newIndicator;
-        }
-        return objToIndicator[obj];
-    }
-
+    #region Indicator
     public void SetBotGOToIndicatorGO(GameObject botGO, GameObject indicatorGO)
     {
         botGOToIndicatorGO[botGO] = indicatorGO;
@@ -60,4 +48,20 @@ public class Cache : Singleton<Cache>
     {
         return botGOToIndicatorGO[botGO];
     }
+
+    public Indicator GetIndicatorFromGameObj(GameObject obj)
+    {
+        if (!objToIndicator.ContainsKey(obj) || objToIndicator[obj] == null)
+        {
+            Indicator newIndicator = obj.GetComponent<Indicator>();
+            if (newIndicator == null)
+            {
+                return null;
+            }
+            else
+                objToIndicator[obj] = newIndicator;
+        }
+        return objToIndicator[obj];
+    }
+    #endregion
 }

@@ -12,6 +12,5 @@ public class BotAfterDeathState : BotBaseState
             bot.SwitchState(bot.WaitState);
     }
 
-
     public override void ExitState(BotStateMachine bot) { }
 }

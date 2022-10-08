@@ -90,9 +90,11 @@ public class BotController : Singleton<BotController>
 
     public void ReuseBot(GameObject bot)
     {
+        // Despawn
         SimplePool.Despawn(bot);
         SimplePool.Despawn(Cache.Ins.GetIndicatorGOFromBotGO(bot));
 
+        // Check if need to spawn
         int remainNumOfBots = LevelManager.Ins.GetRemainNumOfBots();
         int numActiveBots = SimplePool.GetNumOfActiveObjs(botPrefab.gameObject);
 
@@ -117,28 +119,31 @@ public class BotController : Singleton<BotController>
         Vector3 randomPos = GetRandomPos();
         Quaternion randomRot = GetRandomRot();
 
+        // Init bot
         GameObject botGO = SimplePool.Spawn(botPrefab.gameObject, randomPos, randomRot);
         Character botChar = botGO.GetComponent<CharacterBoundary>().character;
-
         string botName = namesToUse[Random.Range(0, namesToUse.Count)];
         botChar.SetName(botName);
         namesToUse.Remove(botName);
 
+        // Set indicator GO
         GameObject indicatorGO = SimplePool.Spawn(indicatorPrefab.gameObject, randomPos, Quaternion.identity);
         indicatorGO.transform.SetParent(indicatorsHolder);
         indicatorGO.transform.localScale = Vector3.one;
-        Indicator indicator = Cache.Ins.GetIndicatorFromGameObj(indicatorGO);
 
+        // Set indicator
+        Indicator indicator = Cache.Ins.GetIndicatorFromGameObj(indicatorGO);
         indicator.SetOriginCharacter(botChar);
         indicator.SetMaterial();
         indicator.SetName();
-
         Cache.Ins.SetBotGOToIndicatorGO(botGO, indicatorGO);
 
+        // Set bot variables
         float botScale = Random.Range(0.9f, 1.1f);
         botGO.transform.localScale = Vector3.one;
         botChar.IncreaseScale(player.GetScale() * botScale);
 
+        // Set scale and score to match player
         if (botScale < 1)
         {
             if (player.GetScore() <= 2)

@@ -18,8 +18,5 @@ public class BotWaitState : BotBaseState
         }
     }
 
-    public override void ExitState(BotStateMachine bot)
-    {
-        
-    }
+    public override void ExitState(BotStateMachine bot) { }
 }

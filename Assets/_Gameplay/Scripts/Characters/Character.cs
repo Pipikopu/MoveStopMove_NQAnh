@@ -5,17 +5,18 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour, IHit
 {
+    // Character variables
     public Character character;
     public CharacterBoundary charBound;
+    public SkinnedMeshRenderer bodyRend;
 
+    // Basic variables
     protected float scale = 1;
     protected int score = 0;
     protected float range = 1;
     protected int scoreToScale = 2;
 
     protected new string name;
-
-    public SkinnedMeshRenderer bodyRend;
 
     private void Awake()
     {
@@ -35,6 +36,9 @@ public class Character : MonoBehaviour, IHit
         scale = 1;
         charBound.transform.localScale = Vector3.one;
     }
+
+    #region Change Variables
+    public virtual void IncreaseRange(float increaseValue) { }
 
     public virtual void IncreaseScale(float scaleRatio)
     {
@@ -60,13 +64,13 @@ public class Character : MonoBehaviour, IHit
     }
 
     public virtual void MultipleScore(int multipleTime) {    }
+    #endregion
 
+    #region Get Variables
     public float GetScale()
     {
         return scale;
     }
-
-    public virtual void IncreaseRange(float increaseValue) { }
 
     public float GetRange()
     {
@@ -78,6 +82,18 @@ public class Character : MonoBehaviour, IHit
         return score;
     }
 
+    public string GetName()
+    {
+        return name;
+    }
+
+    public Material GetBodyMat()
+    {
+        return bodyRend.materials[0];
+    }
+    #endregion
+
+    #region Set Variables
     public void SetScore(int newScore)
     {
         score = newScore;
@@ -88,17 +104,9 @@ public class Character : MonoBehaviour, IHit
     {
         name = newName;
     }
+    #endregion
 
-    public string GetName()
-    {
-        return name;
-    }
-
-    public Material GetBodyMat()
-    {
-        return bodyRend.materials[0];
-    }
-
+    #region Gameplay
     public virtual void Move() { }
 
     public virtual void Attack() { }
@@ -110,4 +118,5 @@ public class Character : MonoBehaviour, IHit
         Death(killer);
         SoundManager.Ins.PlayDieSound();
     }
+    #endregion
 }

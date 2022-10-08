@@ -49,9 +49,11 @@ public class Player : Character, ITarget
     [Header("Following UI")]
     public GameObject underUI;
 
+    // Relevant Variable
+    [Header("Other")]
     public PlayerSkin playerSkin;
     public Indicator playerIndicator;
-    public Character killer;
+    private Character killer;
 
     private void Awake()
     {
@@ -96,7 +98,6 @@ public class Player : Character, ITarget
         score = 0;
         range = 1;
         scoreToScale = 2;
-
     }
 
     private void Update()
@@ -131,12 +132,6 @@ public class Player : Character, ITarget
         MoveCharacter(movement.normalized);
     }
 
-    private void ActivateUI(bool activate)
-    {
-        underUI.SetActive(activate);
-        joystickCanvas.gameObject.SetActive(activate);
-    }
-
     private void InitWeapon()
     {
         ChangeWeapon();
@@ -159,6 +154,12 @@ public class Player : Character, ITarget
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
         SetName(data.name);
         playerIndicator.SetName();
+    }
+
+    private void ActivateUI(bool activate)
+    {
+        underUI.SetActive(activate);
+        joystickCanvas.gameObject.SetActive(activate);
     }
 
     #region Move
@@ -258,11 +259,11 @@ public class Player : Character, ITarget
     {
         if (!isWin)
         {
+            ActivateUI(false);
+
             isDead = true;
             movement = Vector3.zero;
             playerAnimator.SetBool(Constant.ANIM_IS_DEAD, true);
-            //joystickCanvas.gameObject.SetActive(false);
-            ActivateUI(false);
             playerCollider.enabled = false;
             killer = killerChar;
 
@@ -280,13 +281,13 @@ public class Player : Character, ITarget
 
     public void Revive()
     {
-        canAttack = false;
         isDead = false;
+        canAttack = false;
+        canRevive = false;
+        ActivateUI(true);
+        playerCollider.enabled = true;
         playerAnimator.SetBool(Constant.ANIM_IS_DEAD, false);
         playerAnimator.SetBool(Constant.ANIM_IS_IDLE, true);
-        joystickCanvas.gameObject.SetActive(true);
-        playerCollider.enabled = true;
-        canRevive = false;
     }
 
     public void Lose()
@@ -296,14 +297,20 @@ public class Player : Character, ITarget
         UIManager.Ins.OpenUI(UIID.UICFail);
         SoundManager.Ins.PlayLoseSound();
 
-        // Set Progress + Rank
+        SetProgressAndRank();
+    }
+
+    private void SetProgressAndRank()
+    {
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
+
+        // Set Progress
         float newProgress = (float)LevelManager.Ins.GetNumOfBotsDie() / (float)LevelManager.Ins.GetNumOfTotalBots();
         if (data.progress < newProgress)
         {
             data.progress = newProgress;
         }
-
+        // Set Rank
         int newRank = LevelManager.Ins.GetRemainNumOfBots() + 1;
         if (newRank < data.bestRank)
         {
@@ -331,32 +338,28 @@ public class Player : Character, ITarget
             isWin = true;
             movement = Vector3.zero;
             playerAnimator.SetBool(Constant.ANIM_IS_WIN, true);
-            //joystickCanvas.gameObject.SetActive(false);
             ActivateUI(false);
 
             LevelManager.Ins.Win();
             UIManager.Ins.GetUI(UIID.UICGameplay).Close();
             UIManager.Ins.OpenUI(UIID.UICVictory);
+            SoundManager.Ins.PlayVictorySound();
+
+            // Reset Progress, Level, Rank
             PlayerData data = PlayerDataController.Ins.LoadFromJson();
             data.progress = 0;
             data.level += 1;
             data.bestRank = LevelManager.Ins.GetLevelData(data.level).numOfBots + 1;
             PlayerDataController.Ins.SaveToJson(data);
-            SoundManager.Ins.PlayVictorySound();
         }
     }
     #endregion
 
+
+    #region Skin
     public PlayerSkin GetPlayerSkin()
     {
         return playerSkin;
-    }
-
-    public override void IncreaseRange(float increaseValue)
-    {
-        range *= increaseValue;
-        boundaryCollider.radius *= increaseValue;
-        underUI.transform.localScale *= increaseValue;
     }
 
     public void ChooseSkinAnim()
@@ -370,6 +373,15 @@ public class Player : Character, ITarget
         {
             playerAnimator.SetBool(Constant.ANIM_IS_DANCE, false);
         }
+    }
+    #endregion
+
+    #region Basic Variables
+    public override void IncreaseRange(float increaseValue)
+    {
+        range *= increaseValue;
+        boundaryCollider.radius *= increaseValue;
+        underUI.transform.localScale *= increaseValue;
     }
 
     public override void IncreaseScore(int increaseValue)
@@ -389,4 +401,5 @@ public class Player : Character, ITarget
         base.MultipleScore(multipleTime);
         CoinController.Ins.IncreaseCoins(score * (multipleTime - 1));
     }
+    #endregion
 }
