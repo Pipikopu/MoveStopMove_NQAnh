@@ -59,6 +59,8 @@ public class Character : MonoBehaviour, IHit
         }
     }
 
+    public virtual void MultipleScore(int multipleTime) {    }
+
     public float GetScale()
     {
         return scale;

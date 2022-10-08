@@ -14,11 +14,14 @@ public enum UIID
     UICWeaponShop = 4,
     UICSkinShop = 5,
     UICCoin = 6,
-    UICSetting = 7
+    UICSetting = 7,
+    UICRevive = 8
 }
 
 public class UIManager : Singleton<UIManager>
 {
+    public Player player;
+
     public UIID startCanvasId;
     public List<UIID> startUIID;
     public List<UICanvas> startUICanvas;
@@ -26,11 +29,6 @@ public class UIManager : Singleton<UIManager>
     private Dictionary<UIID, UICanvas> UICanvas = new Dictionary<UIID, UICanvas>();
 
     public Transform CanvasParentTF;
-
-    private void Awake()
-    {
-
-    }
 
     private void Start()
     {

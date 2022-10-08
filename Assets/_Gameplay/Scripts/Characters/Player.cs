@@ -43,6 +43,7 @@ public class Player : Character, ITarget
     private bool canAttack;
     private bool isDead;
     private bool isWin;
+    private bool canRevive;
 
     // FollowingUI
     [Header("Following UI")]
@@ -50,6 +51,7 @@ public class Player : Character, ITarget
 
     public PlayerSkin playerSkin;
     public Indicator playerIndicator;
+    public Character killer;
 
     private void Awake()
     {
@@ -72,6 +74,7 @@ public class Player : Character, ITarget
         canAttack = true;
         isDead = false;
         isWin = false;
+        canRevive = true;
 
         // Init Skin
         InitWeapon();
@@ -93,15 +96,16 @@ public class Player : Character, ITarget
         score = 0;
         range = 1;
         scoreToScale = 2;
+
     }
 
     private void Update()
     {
         if (LevelManager.Ins.GetGameState() == Constant.GameState.PLAY)
         {
-            ActivateUI(true);
             if (!isDead && !isWin)
             {
+                ActivateUI(true);
                 if (LevelManager.Ins.GetRemainNumOfBots() == 0)
                 {
                     Win();
@@ -250,21 +254,46 @@ public class Player : Character, ITarget
     #endregion
 
     #region Death
-    public override void Death(Character killer)
+    public override void Death(Character killerChar)
     {
         if (!isWin)
         {
             isDead = true;
             movement = Vector3.zero;
             playerAnimator.SetBool(Constant.ANIM_IS_DEAD, true);
-            joystickCanvas.gameObject.SetActive(false);
+            //joystickCanvas.gameObject.SetActive(false);
+            ActivateUI(false);
             playerCollider.enabled = false;
+            killer = killerChar;
 
-            LevelManager.Ins.Lose(killer);
-            UIManager.Ins.GetUI(UIID.UICGameplay).Close();
-            UIManager.Ins.OpenUI(UIID.UICFail);
-            SoundManager.Ins.PlayLoseSound();
+            if (!canRevive)
+            {
+                Lose();
+            }
+            else
+            {
+                UIManager.Ins.GetUI(UIID.UICGameplay).Close();
+                UIManager.Ins.OpenUI(UIID.UICRevive);
+            }
         }
+    }
+
+    public void Revive()
+    {
+        isDead = false;
+        playerAnimator.SetBool(Constant.ANIM_IS_DEAD, false);
+        playerAnimator.SetBool(Constant.ANIM_IS_IDLE, true);
+        joystickCanvas.gameObject.SetActive(true);
+        playerCollider.enabled = true;
+        canRevive = false;
+    }
+
+    public void Lose()
+    {
+        LevelManager.Ins.Lose(killer);
+        UIManager.Ins.GetUI(UIID.UICGameplay).Close();
+        UIManager.Ins.OpenUI(UIID.UICFail);
+        SoundManager.Ins.PlayLoseSound();
 
         // Set Progress + Rank
         PlayerData data = PlayerDataController.Ins.LoadFromJson();
@@ -301,7 +330,8 @@ public class Player : Character, ITarget
             isWin = true;
             movement = Vector3.zero;
             playerAnimator.SetBool(Constant.ANIM_IS_WIN, true);
-            joystickCanvas.gameObject.SetActive(false);
+            //joystickCanvas.gameObject.SetActive(false);
+            ActivateUI(false);
 
             LevelManager.Ins.Win();
             UIManager.Ins.GetUI(UIID.UICGameplay).Close();
@@ -351,5 +381,11 @@ public class Player : Character, ITarget
     {
         base.IncreaseScale(scaleRatio);
         SoundManager.Ins.PlaySizeUpSound();
+    }
+
+    public override void MultipleScore(int multipleTime)
+    {
+        base.MultipleScore(multipleTime);
+        CoinController.Ins.IncreaseCoins(score * (multipleTime - 1));
     }
 }
