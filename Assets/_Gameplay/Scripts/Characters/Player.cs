@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character, ITarget
 {
@@ -48,12 +49,14 @@ public class Player : Character, ITarget
     // FollowingUI
     [Header("Following UI")]
     public GameObject underUI;
-
+    public Text getScoreText;
+    
     // Relevant Variable
     [Header("Other")]
     public PlayerSkin playerSkin;
     public Indicator playerIndicator;
     private Character killer;
+    public ParticleSystem increaseScaleEffect;
 
     private void Awake()
     {
@@ -98,6 +101,7 @@ public class Player : Character, ITarget
         score = 0;
         range = 1;
         scoreToScale = 2;
+        getScoreText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -387,12 +391,14 @@ public class Player : Character, ITarget
     public override void IncreaseScore(int increaseValue)
     {
         base.IncreaseScore(increaseValue);
+        StartCoroutine(ShowGetScore(increaseValue));
         CoinController.Ins.IncreaseCoins(increaseValue);
     }
 
     public override void IncreaseScale(float scaleRatio)
     {
         base.IncreaseScale(scaleRatio);
+        increaseScaleEffect.Play();
         SoundManager.Ins.PlaySizeUpSound();
     }
 
@@ -402,4 +408,12 @@ public class Player : Character, ITarget
         CoinController.Ins.IncreaseCoins(score * (multipleTime - 1));
     }
     #endregion
+
+    IEnumerator ShowGetScore(int increaseScore)
+    {
+        getScoreText.text = "+" + increaseScore.ToString();
+        getScoreText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        getScoreText.gameObject.SetActive(false);
+    }
 }

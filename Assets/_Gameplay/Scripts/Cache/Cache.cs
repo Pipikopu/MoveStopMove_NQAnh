@@ -8,6 +8,7 @@ public class Cache : Singleton<Cache>
     private Dictionary<GameObject, ITarget> objToITarget = new Dictionary<GameObject, ITarget>();
     private Dictionary<GameObject, Indicator> objToIndicator = new Dictionary<GameObject, Indicator>();
     public Dictionary<GameObject, GameObject> botGOToIndicatorGO = new Dictionary<GameObject, GameObject>();
+    public Dictionary<GameObject, CharacterBoundary> objToCharBound = new Dictionary<GameObject, CharacterBoundary>();
 
 
     #region Interface: IHit, ITarget
@@ -64,4 +65,21 @@ public class Cache : Singleton<Cache>
         return objToIndicator[obj];
     }
     #endregion
+
+    public CharacterBoundary GetCharacterBoundaryFromGameObj(GameObject obj)
+    {
+        if (!objToCharBound.ContainsKey(obj) || objToCharBound[obj] == null)
+        {
+            CharacterBoundary newCharBound = obj.GetComponent<CharacterBoundary>();
+            if (newCharBound == null)
+            {
+                return null;
+            }
+            else
+            {
+                objToCharBound[obj] = newCharBound;
+            }
+        }
+        return objToCharBound[obj];
+    }
 }

@@ -53,9 +53,12 @@ public class UICMainMenu : UICanvas
     public void ChangeName()
     {
         string newName = playerText.text;
-        PlayerData data = PlayerDataController.Ins.LoadFromJson();
-        data.name = newName;
-        PlayerDataController.Ins.SaveToJson(data);
-        UIManager.Ins.player.InitName();
+        if (newName.Length > 0)
+        {
+            PlayerData data = PlayerDataController.Ins.LoadFromJson();
+            data.name = newName;
+            PlayerDataController.Ins.SaveToJson(data);
+            UIManager.Ins.player.InitName();
+        }
     }
 }

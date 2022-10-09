@@ -29,7 +29,7 @@ public class Obstacles : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Constant.TAG_CHARACTER))
         {
-            if (other.gameObject.GetComponent<CharacterBoundary>().isPlayer)
+            if (Cache.Ins.GetCharacterBoundaryFromGameObj(other.gameObject).isPlayer)
             {
                 ChangeInviMat();
             }
@@ -40,7 +40,7 @@ public class Obstacles : MonoBehaviour
     {
         if (other.CompareTag(Constant.TAG_CHARACTER))
         {
-            if (other.gameObject.GetComponent<CharacterBoundary>().isPlayer)
+            if (Cache.Ins.GetCharacterBoundaryFromGameObj(other.gameObject).isPlayer)
             {
                 ChangeNormalMat();
             }
