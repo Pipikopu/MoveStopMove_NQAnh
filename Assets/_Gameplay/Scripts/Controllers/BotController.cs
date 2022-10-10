@@ -75,8 +75,9 @@ public class BotController : Singleton<BotController>
 
     public void SpawnAllBots()
     {
-        SimplePool.CollectAll();
-        
+        SimplePool.CollectAPool(botPrefab.gameObject);
+        SimplePool.CollectAPool(indicatorPrefab.gameObject);
+
         for (int i = 0; i < numOfBotsOnGround; i++)
         {
             SpawnBot();

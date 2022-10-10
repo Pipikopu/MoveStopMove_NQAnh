@@ -386,6 +386,16 @@ public class Player : Character, ITarget
         range *= increaseValue;
         boundaryCollider.radius *= increaseValue;
         underUI.transform.localScale *= increaseValue;
+
+        if (increaseValue > 1)
+        {
+            SoundManager.Ins.PlaySizeUpSound();
+        }
+    }
+
+    public void IncreaseRangeInTime(float time)
+    {
+        StartCoroutine(IEIncreaseRange(time));
     }
 
     public override void IncreaseScore(int increaseValue)
@@ -398,8 +408,30 @@ public class Player : Character, ITarget
     public override void IncreaseScale(float scaleRatio)
     {
         base.IncreaseScale(scaleRatio);
-        increaseScaleEffect.Play();
-        SoundManager.Ins.PlaySizeUpSound();
+        if (scaleRatio > 1)
+        {
+            increaseScaleEffect.Play();
+            SoundManager.Ins.PlaySizeUpSound();
+        }
+    }
+
+    public void IncreaseScaleInTime(float time)
+    {
+        StartCoroutine(IEIncreaseScale(time));
+    }
+
+    public void IncreaseSpeed(float speedRatio)
+    {
+        moveSpeed *= speedRatio;
+        if (speedRatio > 1)
+        {
+            SoundManager.Ins.PlaySizeUpSound();
+        }
+    }
+
+    public void IncreaseSpeedInTime(float time)
+    {
+        StartCoroutine(IEIncreaseSpeed(time));
     }
 
     public override void MultipleScore(int multipleTime)
@@ -415,5 +447,26 @@ public class Player : Character, ITarget
         getScoreText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         getScoreText.gameObject.SetActive(false);
+    }
+
+    IEnumerator IEIncreaseRange(float time)
+    {
+        IncreaseRange(2f);
+        yield return new WaitForSeconds(time);
+        IncreaseRange(0.5f);
+    }
+
+    IEnumerator IEIncreaseSpeed(float time)
+    {
+        IncreaseSpeed(1.5f);
+        yield return new WaitForSeconds(time);
+        IncreaseSpeed(0.66f);
+    }
+
+    IEnumerator IEIncreaseScale(float time)
+    {
+        IncreaseScale(1.25f);
+        yield return new WaitForSeconds(time);
+        IncreaseScale(0.8f);
     }
 }

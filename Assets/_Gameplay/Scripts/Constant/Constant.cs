@@ -28,6 +28,12 @@ public static class Constant
     // Game State
     public enum GameState { PAUSE, PLAY, CHOOSESKIN, END};
 
+    // Gift Buff
+    public enum GiftBuff { SPEED, RANGE, SCALE };
+
+    // New Item Type
+    public enum NewItemType { HAT, PANT, SHIELD };
+
     // Item Equip State
     public enum ItemState
     {

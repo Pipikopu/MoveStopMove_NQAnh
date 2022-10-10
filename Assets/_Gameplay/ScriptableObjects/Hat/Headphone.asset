@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c90b649e5f54ebcade1eca8e2ed9cf, type: 3}
   m_Name: Headphone
   m_EditorClassIdentifier: 
-  hatSkinID: 7
+  hatSkinID: 6
   hatPrefab: {fileID: 7482048372144663704, guid: e02219a31932c43b4a1adf57db8b0931, type: 3}
   hatCost: 200
